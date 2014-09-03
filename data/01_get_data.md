@@ -27,6 +27,9 @@ You can also download the data directly from the source. We only use OpenData, s
 * [Terrain data](http://smartdata.grandlyon.com/imagerie/modfle-numfrique-de-terrain-du-grand-lyon-pixel-de-10-m/)
 ([zip file](http://smartdata.grandlyon.com/smartdata/wp-content/plugins/wp-smartdata/proxy.php?format=zip&name=MNT2009_Altitude_10m_CC46.zip&commune=undefined&href=https%3A%2F%2Fdownload.data.grandlyon.com%2Ffiles%2Fgrandlyon%2Fimagerie%2Fmnt2009%2FMNT2009_Altitude_10m_CC46.zip))
 
+* Parcs and forest 
+([zip file](http://download.geofabrik.de/europe/france/rhone-alpes-latest.shp.zip))
+
 <!---
 # fast forward :)
 grep 'zip file' 01_get_data.md |sed 's/(\[zip file\](\(.*\)))/wget "\1" -O out.zip \&\& unzip out.zip/' | sh

@@ -21,6 +21,7 @@ For vector data, we use ogr2ogr to carry out both operations (cropping and repro
     ogr2ogr -clipdst 1841372.165967 5174640.031139 1844890.870163 5176327.053583 -t_srs EPSG:3946 roofs.shp fpc_fond_plan_communaut_fpctoit.shp
     ogr2ogr -clipdst 1841372.165967 5174640.031139 1844890.870163 5176327.053583 -t_srs EPSG:3946 arrondissements.shp adr_voie_lieu.adrarrond.shp
     ogr2ogr -clipdst 1841372.165967 5174640.031139 1844890.870163 5176327.053583 -t_srs EPSG:3946 velov_stations.shp jcd_jcdecaux.jcdvelov.shp
+    ogr2ogr -clipdst 1841372.165967 5174640.031139 1844890.870163 5176327.053583 -t_srs EPSG:3946 lands.shp natural.shp
 
 For raster data we use gdalwarp:
 
@@ -43,6 +44,7 @@ With that we are ready to import the cropped vector data into the database:
     shp2pgsql -W LATIN1 -I -s 3946 roofs.shp roofs | psql lyon
     shp2pgsql -W LATIN1 -I -s 3946 arrondissements.shp arrondissements | psql lyon
     shp2pgsql -W LATIN1 -I -s 3946 velov_stations.shp velov_stations | psql lyon
+    shp2pgsql -W LATIN1 -I -s 3946 lands.shp lands | psql lyon
 
 and the cropped raster data:
 
