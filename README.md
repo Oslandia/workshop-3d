@@ -27,8 +27,8 @@ It features a few software components :
 * A 3D web client and library, to display 3D data in a browser, based on WebGL and Three.js
 
 You can follow the workshop through the various steps of each module :
-* data : getting the data in shape
-* horao : using the OpenGL viewer, and make some 3D analysis
+* data : get the data in shape
+* analysis : use the OpenGL viewer, and make some 3D analysis
 * webgl : display 3D in a browser
 
 In each module, steps are marked with a number, allowing you to follow easily the whole training sesion.
