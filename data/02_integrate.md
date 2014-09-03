@@ -1,7 +1,6 @@
 Integrating data
 ================
 
-
 Cropping and reprojecting
 -------------------------
 
@@ -27,4 +26,18 @@ For raster data we use gdalwarp:
 
     gdalwarp -of gtiff -t_srs EPSG:3946 -te 1841372.165967 5174640.031139 1844890.870163 5176327.053583 MNT2009_Altitude_10m_CC46.tif  mnt.tif
     gdalwarp -of gtiff -t_srs EPSG:3946 -te 1841372.165967 5174640.031139 1844890.870163 5176327.053583 Carte_agglo_Lyon_NO2_2012.tif  N02.tif
+
+
+Create and populate the database
+--------------------------------
+
+We will need postgis, postgis_raster and postgis_sfcgal extensions:
+
+    createdb lyon
+    psql lyon -c 'CREATE EXTENSION postgis'
+    psql lyon -c 'CREATE EXTENSION postgis_raster'
+    psql lyon -c 'CREATE EXTENSION postgis_sfcgal'
+
+
+
 
