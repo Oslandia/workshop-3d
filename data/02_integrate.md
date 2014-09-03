@@ -40,4 +40,3 @@ We will need postgis, postgis_raster and postgis_sfcgal extensions:
 
 
 
-
