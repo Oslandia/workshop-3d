@@ -8,6 +8,7 @@ The first step is to check that we have a working spatial database with 3D featu
 
 ```
 psql -h localhost -U pggis -d pggis -c "select postgis_full_version();"
+psql -h localhost -U pggis -d pggis -c "postgis_sfcgal_version();"
 ```
 
 QGIS
