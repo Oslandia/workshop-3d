@@ -26,10 +26,18 @@ It features a few software components :
 * MapServer TinyOWS : a vector data server, with PostGIS and 3D support
 * A 3D web client and library, to display 3D data in a browser, based on WebGL and Three.js
 
+You can follow the workshop through the various steps of each module :
+* data : getting the data in shape
+* horao : using the OpenGL viewer, and make some 3D analysis
+* webgl : display 3D in a browser
+
+In each module, steps are marked with a number, allowing you to follow easily the whole training sesion.
+
 Environment
 -----------
 
 This workshop is designed to be run on a Linux Operating System. Ubuntu 14.04 is preferred.
+You will need a good graphic card, and if you use a virtual machine, it is better to have 3D acceleration activated and working in the guest OS, as well as guest extensions installed.
 
 To follow this workshop, you will need to have the abovementionned elements installed.
 
