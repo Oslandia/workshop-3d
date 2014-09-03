@@ -36,26 +36,32 @@ Install Ubuntu 14.04 Trusty Thar LTS
 
 Once installed, we will need a few packages :
 
+```
   sudo apt-get install git wget gdal-bin unzip
+```
 
 
 ### QGIS ###
 
 To install QGIS, use Ubuntu packages :
 
+```
   sudo apt-get install qgis python-qgis
+```
 
 
 ### Horao ###
 
 To install horao on Ubuntu Trusty, you have to compile it
 
+```
   sudo apt-get install python-qt4 python-qt4-sql libboost-dev cmake libgdal-dev libpq-dev libopenscenegraph-dev liblwgeom-dev pyqt4-dev-tools libproj-dev libgdal1-dev 
 
   mkdir build && cd build
   git clone https://github.com/Oslandia/horao.git
   cmake .
   make && sudo make install
+```
 
 ### Server-side components ###
 
@@ -63,25 +69,35 @@ To install all server-side components, we use a Docker container, featuring all 
 
 Make sure you have Docker installed :
 
+```
   sudo apt-get install docker.io
+```
 
 Make a shared local folder :
 
+```
   cd
   mkdir -p data/cache data/restore data/www
   chmod -R 777 data
+```
 
 Put the database dump you want to restore in data/restore
 
+```
   cp lyon.backup data/restore
+```
 
 Download and run the container in your Ubuntu OS :
 
+```
   sudo docker.io run --rm -p 5432:5432 -p 80:80 --name 3dgis_test -v ~/data:/data --name 3dgis_test oslandia/3dgis /sbin/my_init
+```
 
 You should now be able to access PostGIS through your localhost Ubuntu (credentials pggis/pggis) :
 
+```
   psql -h localhost -U pggis -d pggis
+```
 
 And you have access to the web server as well :
 
@@ -95,9 +111,11 @@ You are now ready to follow the workshop.
 
 If you have trouble with the Docker container downloaded, or if you want to change the setup, you can rebuild the image yourself. Follow these steps.
 
+```
   git clone https://github.com/vpicavet/docker-3dgis.git
   cd docker-3dgis
   sudo docker.io build -t oslandia/3dgis .
+```
 
 Then follow the steps from previous chapter (docker.io run).
 
