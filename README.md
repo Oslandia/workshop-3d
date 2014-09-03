@@ -15,4 +15,90 @@ It features a few software components :
 * MapServer TinyOWS : a vector data server, with PostGIS and 3D support
 * A 3D web client and library, to display 3D data in a browser, based on WebGL and Three.js
 
+Environment
+-----------
 
+This workshop is designed to be run on a Linux Operating System. Ubuntu 14.04 is preferred.
+
+To follow this workshop, you will need to have the abovementionned elements installed.
+
+You can use a VirtualBox image with all software already installed and setup, or you can choose to install them yourself. See below for installation instructions.
+
+
+Installation
+------------
+
+### OS ###
+
+Install Ubuntu 14.04 Trusty Thar LTS
+
+* http://releases.ubuntu.com/14.04/
+
+Once installed, we will need a few packages :
+
+  sudo apt-get install git wget gdal-bin unzip
+
+
+### QGIS ###
+
+To install QGIS, use Ubuntu packages :
+
+  sudo apt-get install qgis python-qgis
+
+
+### Horao ###
+
+To install horao on Ubuntu Trusty, you have to compile it
+
+  sudo apt-get install python-qt4 python-qt4-sql libboost-dev cmake libgdal-dev libpq-dev libopenscenegraph-dev liblwgeom-dev pyqt4-dev-tools libproj-dev libgdal1-dev 
+
+  mkdir build && cd build
+  git clone https://github.com/Oslandia/horao.git
+  cmake .
+  make && sudo make install
+
+### Server-side components ###
+
+To install all server-side components, we use a Docker container, featuring all necessary bits for this workshop.
+
+Make sure you have Docker installed :
+
+  sudo apt-get install docker.io
+
+Make a shared local folder :
+
+  cd
+  mkdir -p data/cache data/restore data/www
+  chmod -R 777 data
+
+Put the database dump you want to restore in data/restore
+
+  cp lyon.backup data/restore
+
+Download and run the container in your Ubuntu OS :
+
+  sudo docker.io run --rm -p 5432:5432 -p 80:80 --name 3dgis_test -v ~/data:/data --name 3dgis_test oslandia/3dgis /sbin/my_init
+
+You should now be able to access PostGIS through your localhost Ubuntu (credentials pggis/pggis) :
+
+  psql -h localhost -U pggis -d pggis
+
+And you have access to the web server as well :
+
+* http://localhost
+* http://localhost/mapcache
+* http://localhost/cgi-bin/tinyows
+
+You are now ready to follow the workshop.
+
+### Rebuild server-side components ###
+
+If you have trouble with the Docker container downloaded, or if you want to change the setup, you can rebuild the image yourself. Follow these steps.
+
+  git clone https://github.com/vpicavet/docker-3dgis.git
+  cd docker-3dgis
+  sudo docker.io build -t oslandia/3dgis .
+
+Then follow the steps from previous chapter (docker.io run).
+
+  
