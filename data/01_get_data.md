@@ -21,14 +21,14 @@ You can also download the data directly from the source. We only use OpenData, s
 * Roofs 
 ([zip file](http://smartdata.grandlyon.com/smartdata/wp-content/plugins/wp-smartdata/proxy.php?format=shape&name=fpc_fond_plan_communaut.fpctoit.zip&commune=undefined&href=https%3A%2F%2Fdownload.data.grandlyon.com%2Ffiles%2Fgrandlyon%2Flocalisation%2Ffpc_fond_plan_communaut.fpctoit.zip))
 
+* Parcs and forest 
+([zip file](http://download.geofabrik.de/europe/france/rhone-alpes-latest.shp.zip))
+
 * [NO2 estimation](http://smartdata.grandlyon.com/environnement/estimation-de-la-concentration-du-dioxyde-dazote-no2-du-grand-lyon-en-2012) 
 ([zip file](http://smartdata.grandlyon.com/smartdata/wp-content/plugins/wp-smartdata/proxy.php?format=zip&name=Carte_agglo_Lyon_NO2_2012.zip&commune=undefined&href=https%3A%2F%2Fdownload.data.grandlyon.com%2Ffiles%2Fsmartdata%2Fair_rhonealpes%2FCarte_agglo_Lyon_NO2_2012.zip))
 
 * [Terrain data](http://smartdata.grandlyon.com/imagerie/modfle-numfrique-de-terrain-du-grand-lyon-pixel-de-10-m/)
 ([zip file](http://smartdata.grandlyon.com/smartdata/wp-content/plugins/wp-smartdata/proxy.php?format=zip&name=MNT2009_Altitude_10m_CC46.zip&commune=undefined&href=https%3A%2F%2Fdownload.data.grandlyon.com%2Ffiles%2Fgrandlyon%2Fimagerie%2Fmnt2009%2FMNT2009_Altitude_10m_CC46.zip))
-
-* Parcs and forest 
-([zip file](http://download.geofabrik.de/europe/france/rhone-alpes-latest.shp.zip))
 
 <!---
 # fast forward :)

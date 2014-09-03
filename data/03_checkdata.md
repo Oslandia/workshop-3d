@@ -42,10 +42,10 @@ Visual check
 * Open QGIS
 * Add DEM raster layer as PostGIS raster layer
 * Create a new PostGIS database connection (localhost, user pggis, password pggis)
-* Add new PostGIS Layer: cadbatiment
-* Add new PostGIS Layer: fpctoit
-* Add new PostGIS Layer: bike
+* Add new PostGIS Layer: arrondissements
+* Add new PostGIS Layer: roofs
 * Add new PostGIS Layer: lands
+* Add new PostGIS Layer: velov_stations
 * Use DB Manager to load only lands having 'park' as type value
 * Save as a new QGIS project
 
