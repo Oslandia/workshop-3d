@@ -80,6 +80,9 @@ To install horao on Ubuntu Trusty, you have to compile it
   git clone https://github.com/Oslandia/horao.git
   cmake .
   make && sudo make install
+  # activate qgis plugins
+  cd ~/.qgis2/python/plugins/
+  ln -s ~/build/horao/qgis_plugin
 ```
 
 ### Server-side components ###
