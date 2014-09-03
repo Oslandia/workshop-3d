@@ -24,19 +24,31 @@ For vector data, we use ogr2ogr to carry out both operations (cropping and repro
 
 For raster data we use gdalwarp:
 
-    gdalwarp -of gtiff -t_srs EPSG:3946 -te 1841372.165967 5174640.031139 1844890.870163 5176327.053583 MNT2009_Altitude_10m_CC46.tif  mnt.tif
+    gdalwarp -of gtiff -t_srs EPSG:3946 -te 1841372.165967 5174640.031139 1844890.870163 5176327.053583 MNT2009_Altitude_10m_CC46.tif  dem.tif
     gdalwarp -of gtiff -t_srs EPSG:3946 -te 1841372.165967 5174640.031139 1844890.870163 5176327.053583 Carte_agglo_Lyon_NO2_2012.tif  N02.tif
 
 
 Create and populate the database
 --------------------------------
 
-We will need postgis, postgis_raster and postgis_sfcgal extensions:
+We will need postgis, postgis_topology and postgis_sfcgal extensions:
 
     createdb lyon
     psql lyon -c 'CREATE EXTENSION postgis'
-    psql lyon -c 'CREATE EXTENSION postgis_raster'
     psql lyon -c 'CREATE EXTENSION postgis_sfcgal'
+    psql lyon -c 'CREATE EXTENSION postgis_topology'
+
+With that we are ready to import the cropped vector data into the database:
+
+    shp2pgsql -W LATIN1 -I -s 3946 roofs.shp roofs | psql lyon
+    shp2pgsql -W LATIN1 -I -s 3946 arrondissements.shp arrondissements | psql lyon
+    shp2pgsql -W LATIN1 -I -s 3946 velov_stations.shp velov_stations | psql lyon
+
+and the cropped raster data:
+
+    raster2pgsql -t 25x25 -I dem.tif dem | psql lyon
+    raster2pgsql -t 25x25 -I N02.tif no2 | psql lyon
+
 
 
 
