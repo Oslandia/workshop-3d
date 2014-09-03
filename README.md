@@ -1,7 +1,18 @@
 workshop-3d
 ===========
 
+About
+-----
+
 A Workshop on 3D GIS stack (Horao, PostGIS 3D, 3D web client)
+
+This workshop is a work from Oslandia's team, and has been setup initially for FOSS4G 2014 ( http://www.foss4g.org ).
+
+Feel free to contact us for more information, training sessions or development on these software :
+* Web :   http://www.oslandia.com
+* Blog :  http://www.oslandia.com/articles.html
+* Mail :  infos+3d@oslandia.com
+* Twitter : @Oslandia_en and @Oslandia_fr (french)
 
 Content
 -------
@@ -119,4 +130,7 @@ If you have trouble with the Docker container downloaded, or if you want to chan
 
 Then follow the steps from previous chapter (docker.io run).
 
-  
+Troubleshooting
+---------------
+
+You can report issues with this workshop on this GitHub's repository issue tracker.
