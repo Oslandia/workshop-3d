@@ -49,7 +49,7 @@ Installation
 
 ### OS ###
 
-Install Ubuntu 14.04 Trusty Thar LTS
+Install Ubuntu 14.04 Trusty Tahr LTS
 
 * http://releases.ubuntu.com/14.04/
 
