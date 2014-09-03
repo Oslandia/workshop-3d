@@ -56,7 +56,7 @@ Install Ubuntu 14.04 Trusty Thar LTS
 Once installed, we will need a few packages :
 
 ```
-  sudo apt-get install git wget gdal-bin unzip
+  sudo apt-get install git wget gdal-bin unzip pgadmin3
 ```
 
 
