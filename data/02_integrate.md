@@ -48,8 +48,8 @@ With that we are ready to import the cropped vector data into the database:
 
 and the cropped raster data:
 
-    raster2pgsql -t 25x25 -I dem.tif dem | psql lyon
-    raster2pgsql -t 25x25 -I N02.tif no2 | psql lyon
+    raster2pgsql -t 32x32 -I -s 3946 dem.tif dem | psql lyon
+    raster2pgsql -t 32x32 -I -s 3946 N02.tif no2 | psql lyon
 
 
 

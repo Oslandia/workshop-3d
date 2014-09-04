@@ -218,3 +218,81 @@ SELECT gid as gid, geom as pos, available_::integer*10 as height, 30 as width fr
 ```
 
 Save your QGIS project
+
+
+Compute average NO2 value per buildind
+--------------------------------------
+
+
+```SQL
+ALTER TABLE roofs ADD COLUMN no2_red float;
+ALTER TABLE roofs ADD COLUMN no2_green float; 
+ALTER TABLE roofs ADD COLUMN no2_blue float;
+WITH points AS (SELECT gid, ST_SetSRID(ST_Centroid(geom), 3946) AS geom FROM roofs),
+colors AS ( SELECT gid,
+                   ST_Value(rast, 1, geom) AS red,  
+                   ST_Value(rast, 1, geom) AS green, 
+                   ST_Value(rast, 1, geom) AS blue FROM points, dem WHERE geom && rast )
+UPDATE roofs
+SET (no2_red, no2_green, no2_blue)=(colors.red, colors.green, colors.blue) 
+FROM colors WHERE roofs.gid = colors.gid;
+```
+
+
+<---
+WITH points AS (SELECT gid, ST_SetSRID((ST_DumpPoints(geom)).geom, 3946) AS geom FROM roofs),
+colors AS ( SELECT gid,
+                   AVG(ST_NearestValue(rast, 1, geom)) AS red,  
+                   AVG(ST_NearestValue(rast, 2, geom)) AS green, 
+                   AVG(ST_NearestValue(rast, 3, geom)) AS blue FROM points, no2 WHERE geom && rast AND NOT ST_IsEmpty(rast) GROUP BY gid)
+UPDATE roofs
+SET (no2_red, no2_green, no2_blue)=(colors.red, colors.green, colors.blue) 
+FROM colors WHERE roofs.gid = colors.gid;
+
+
+
+WITH colors AS (
+        SELECT gid, ST_Value(rast, 1, ST_Centroid(geom)) AS red,  ST_Value(rast, 2, ST_Centroid(geom)) AS green, ST_Value(rast, 3, ST_Centroid(geom)) AS blue 
+        FROM roofs, no2 WHERE rast && ST_Centroid(geom) ) 
+UPDATE roofs
+SET (no2_red, no2_green, no2_blue)=(colors.red, colors.green, colors.blue) 
+FROM colors WHERE roofs.gid = colors.gid;
+
+
+ALTER TABLE roofs ADD COLUMN no2_red float;
+ALTER TABLE roofs ADD COLUMN no2_green float; 
+ALTER TABLE roofs ADD COLUMN no2_blue float;
+WITH clipped AS (SELECT gid AS id, 
+        ST_Clip(rast,ST_Buffer(ST_Force2d(geom),10)) AS rast
+        FROM no2,roofs WHERE rast && geom AND ST_Intersects(rast,ST_Force2d(geom)))
+UPDATE roofs
+SET (no2_red, no2_green, no2_blue)=(stats.red, stats.green, stats.blue) 
+FROM (SELECT id, (ST_SummaryStats(rast,1,TRUE)).max AS red, 
+                 (ST_SummaryStats(rast,2,TRUE)).max AS green, 
+                 (ST_SummaryStats(rast,3,TRUE)).max AS blue FROM clipped) AS stats 
+WHERE gid=stats.id;
+
+create table test as select gid as gid, ST_Intersection(t.geom, r.geom ) as geom from (select ST_Collect(ST_DumpAsPolygons(rast)) as geom from no2) as r, foofs as t where t.geom && r.geom;
+
+
+
+
+WITH clipped AS (SELECT gid AS id, 
+        (ST_SummaryStats(ST_Clip(rast,ST_Force2d(geom)))).mean AS mean 
+        FROM no2,roofs WHERE rast && geom AND ST_Intersects(rast,ST_Force2d(geom)))
+UPDATE roofs
+SET (avg_no2=stats. FROM stats WHERE gid=stats.id;
+
+
+```
+WITH inter AS ( select gid, st_intersection(geom, rast, 1) as red, st_intersection(geom, rast, 1)  AS green, st_intersection(geom, rast, 1)  AS blue 
+FROM roofs, no2 where geom && rast and st_isvalid(geom) ),
+avg AS ( select gid, 
+        SUM((red).val*st_area((red).geom))/SUM(st_area((red).geom)) AS red, 
+        SUM((green).val*st_area((green).geom))/SUM(st_area((green).geom)) AS green, 
+        SUM((blue).val*st_area((blue).geom))/SUM(st_area((blue).geom)) AS blue 
+FROM inter group by gid )
+UPDATE roofs
+SET (no2_red, no2_green, no2_blue)=(avg.red, avg.green, avg.blue) FROM avg;
+
+-->
