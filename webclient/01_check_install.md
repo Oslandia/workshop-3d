@@ -35,7 +35,7 @@ If you followed this workshop until now, you should already be able to connect t
 Just in case you did not, check that it is alive (credentials : *pggis/pggis*).
 
 ```
-psql -h localhost -U pggis -d pggis -c "SELECT postgis_version();"
+psql -U pggis -h localhost -d pggis -c "SELECT postgis_version();"
 ```
 
 MapCache
