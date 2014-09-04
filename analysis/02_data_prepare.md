@@ -119,7 +119,7 @@ lod2 = st_translate(lod2, 0, 0, altitude);
 SELECT min(altitude), max(altitude), avg(altitude) FROM roofs;
 ```
 
-Compute 2D from DEM on lands
+Compute 3D from DEM on lands
 ----------------------------
 
 ```SQL
@@ -163,7 +163,7 @@ SELECT min(altitude), max(altitude), avg(altitude) FROM lands;
 ```
 
 
-Compute 2D from DEM on velov_stations
+Compute 3D from DEM on velov_stations
 -------------------------------------
 
 ```SQL
