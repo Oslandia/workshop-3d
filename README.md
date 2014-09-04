@@ -1,6 +1,8 @@
 workshop-3d
 ===========
 
+![Screenshot Cardano Lyon Part-Dieu](https://raw.githubusercontent.com/vpicavet/workshop-3d/master/lyonpartdieu.jpg)
+
 About
 -----
 
@@ -74,7 +76,7 @@ To install QGIS, use Ubuntu packages :
 To install horao on Ubuntu Trusty, you have to compile it
 
 ```
-  sudo apt-get install python-qt4 python-qt4-sql libboost-dev cmake libgdal-dev libpq-dev libopenscenegraph-dev liblwgeom-dev pyqt4-dev-tools libproj-dev libgdal1-dev 
+  sudo apt-get install python-qt4 python-qt4-sql libboost-dev cmake libgdal-dev libpq-dev libopenscenegraph-dev liblwgeom-dev pyqt4-dev-tools libproj-dev libgdal1-dev build-essential
 
   mkdir build && cd build
   git clone https://github.com/Oslandia/horao.git
