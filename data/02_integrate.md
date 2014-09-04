@@ -6,11 +6,11 @@ Cropping and reprojecting
 
 We are only interested with a small extend of the downloaded data. The zone of interest are in the directory zones.
 
-Moreover we want to have data in the same coordinate system (namely EPG:3946).
+Moreover we want to have data in the same coordinate system (namely EPG:3946). We will use the GDAL/OGR command line tools to manipulate our data.
 
 To get the extend we are interested in can be obtained with:
 
-    ogrinfo -al zones |grep Extent
+    ogrinfo -al zones | grep Extent
 
 the result is:
 
@@ -32,24 +32,28 @@ For raster data we use gdalwarp:
 Create and populate the database
 --------------------------------
 
-We will need postgis, postgis_topology and postgis_sfcgal extensions:
+To facilitate the connexion to the database, we will use a *.pgpass* file, which allow us to store username and password, so as not having to type it each time. The file must be protected.
 
-    createdb lyon
-    psql lyon -c 'CREATE EXTENSION postgis'
-    psql lyon -c 'CREATE EXTENSION postgis_sfcgal'
-    psql lyon -c 'CREATE EXTENSION postgis_topology'
+    echo "localhost:5432:*:pggis:pggis" > ~/.pgpass
+    chmod 600 ~/.pgpass
+
+We will need postgis and postgis_sfcgal extensions in a newly created databse.
+
+    psql -U pggis -h localhost -c "CREATE DATABASE lyon WITH OWNER = pggis ENCODING = 'UTF8' TEMPLATE = template0 CONNECTION LIMIT = -1;" postgres
+    psql -U pggis -h localhost -d lyon -c 'CREATE EXTENSION postgis;'
+    psql -U pggis -h localhost -d lyon -c 'CREATE EXTENSION postgis_sfcgal;'
 
 With that we are ready to import the cropped vector data into the database:
 
-    shp2pgsql -W LATIN1 -I -s 3946 roofs.shp roofs | psql lyon
-    shp2pgsql -W LATIN1 -I -s 3946 arrondissements.shp arrondissements | psql lyon
-    shp2pgsql -W LATIN1 -I -s 3946 velov_stations.shp velov_stations | psql lyon
-    shp2pgsql -W LATIN1 -I -s 3946 lands.shp lands | psql lyon
+    shp2pgsql -W LATIN1 -I -s 3946 roofs.shp roofs | psql -U pggis -h localhost lyon
+    shp2pgsql -W LATIN1 -I -s 3946 arrondissements.shp arrondissements | psql -U pggis -h localhost lyon
+    shp2pgsql -W LATIN1 -I -s 3946 velov_stations.shp velov_stations | psql -U pggis -h localhost lyon
+    shp2pgsql -W LATIN1 -I -s 3946 lands.shp lands | psql -U pggis -h localhost lyon
 
 and the cropped raster data:
 
-    raster2pgsql -t 32x32 -I -s 3946 dem.tif dem | psql lyon
-    raster2pgsql -t 32x32 -I -s 3946 N02.tif no2 | psql lyon
+    raster2pgsql -t 32x32 -I -s 3946 dem.tif dem | psql -U pggis -h localhost lyon
+    raster2pgsql -t 32x32 -I -s 3946 N02.tif no2 | psql -U pggis -h localhost lyon
 
 
 
