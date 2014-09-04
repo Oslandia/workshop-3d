@@ -207,9 +207,14 @@ SELECT min(altitude), max(altitude), avg(altitude) FROM velov_stations;
 Check the result
 ----------------
 
-Load LOD2, lands , velov_stations and mnt layer together in both 2D and 3D
+Load LOD2, lands and mnt layer together in both 2D and 3D
 
 Change color symbology
 
-Save your QGIS project
+Use DbManager to load velov availability as bars on the map:
 
+```SQL
+SELECT gid as gid, geom as pos, available_::integer*10 as height, 30 as width from velov_stations /**WHERE TILE && geom*/
+```
+
+Save your QGIS project
