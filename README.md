@@ -116,7 +116,7 @@ Put the database dump you want to restore in data/restore
 Download and run the container in your Ubuntu OS :
 
 ```
-  sudo docker.io run --rm -p 5432:5432 -p 80:80 --name 3dgis_test -v ~/data:/data --name 3dgis_test oslandia/3dgis /sbin/my_init
+  sudo docker.io run --rm -p 5432:5432 -p 80:80 -v ~/data:/data --name 3dgis_test oslandia/3dgis /sbin/my_init
 ```
 
 You should now be able to access PostGIS through your localhost Ubuntu (credentials pggis/pggis) :
@@ -149,7 +149,11 @@ If you have trouble with the Docker container downloaded, or if you want to chan
 
 Then follow the steps from previous chapter (docker.io run).
 
+If running the container gives you an infinit number of "...", then you probably hit the mysterious Docker bug we are investigating on. One workaround to get the container work currently is deleting all Docker images and containers, then rebuilding both docker-pggis and docker-3dgis locally.
+
 Troubleshooting
 ---------------
+
+If you have trouble with the Docker container, see the previous paragraph, and look at the documentation and issues on GitHub.
 
 You can report issues with this workshop on this GitHub's repository issue tracker.
