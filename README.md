@@ -138,6 +138,10 @@ You are now ready to follow the workshop.
 If you have trouble with the Docker container downloaded, or if you want to change the setup, you can rebuild the image yourself. Follow these steps.
 
 ```
+  git clone https://github.com/vpicavet/docker-pggis.git
+  cd docker-pggis
+  sudo docker.io build -t oslandia/pggis .
+  cd ..
   git clone https://github.com/vpicavet/docker-3dgis.git
   cd docker-3dgis
   sudo docker.io build -t oslandia/3dgis .
