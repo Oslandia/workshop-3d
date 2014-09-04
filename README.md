@@ -4,7 +4,7 @@ workshop-3d
 About
 -----
 
-A Workshop on 3D GIS stack (Horao, PostGIS 3D, 3D web client)
+A Workshop on 3D GIS stack (Horao, PostGIS 3D, Cardano 3D web client)
 
 This workshop is a work from Oslandia's team, and has been setup initially for FOSS4G 2014 ( http://www.foss4g.org ).
 
@@ -24,7 +24,7 @@ It features a few software components :
 * Horao : a 3D OpenGL viewer, with a QGIS plugin and PostGIS 3D support
 * MapServer Mapcache : a map caching server
 * MapServer TinyOWS : a vector data server, with PostGIS and 3D support
-* A 3D web client and library, to display 3D data in a browser, based on WebGL and Three.js
+* Cardano, a 3D web client and library, to display 3D data in a browser, based on WebGL and Three.js
 
 You can follow the workshop through the various steps of each module :
 * data : get the data in shape
@@ -49,7 +49,7 @@ Installation
 
 ### OS ###
 
-Install Ubuntu 14.04 Trusty Thar LTS
+Install Ubuntu 14.04 Trusty Tahr LTS
 
 * http://releases.ubuntu.com/14.04/
 
