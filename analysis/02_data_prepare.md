@@ -1,14 +1,23 @@
 Prepare data
 ============
 
+We will now prepare the data so that we can visualize it with Horao.
+
 LOD 2 Building Data Extrusion
 -----------------------------
 
 ```SQL
-ALTER TABLE roofs
-ADD COLUMN lod2 geometry('POLYHEDRALSURFACEZ',3946);
-UPDATE roofs
-SET lod2=ST_GeometryN(ST_Extrude(ST_Force2D(geom), 0, 0, hfacade),1);
+ALTER TABLE 
+    roofs
+ADD COLUMN 
+    lod2 geometry('POLYHEDRALSURFACEZ',3946);
+
+--
+UPDATE 
+    roofs
+SET 
+    lod2 = ST_GeometryN(ST_Extrude(ST_Force2D(geom), 0, 0, hfacade),1);
+
 -- Create spatial indexes
 CREATE INDEX roofs_lod2_idx ON roofs USING GIST(lod2);
 ```
@@ -17,15 +26,28 @@ LOD 1 Building Data Computation
 -------------------------------
 
 ```SQL
-ALTER TABLE roofs ADD COLUMN lod1 geometry('POLYHEDRALSURFACEZ',3946);
+ALTER TABLE 
+    roofs 
+ADD COLUMN 
+    lod1 geometry('POLYHEDRALSURFACEZ',3946);
+
+-- get Polyhedralsurfaces
 WITH p AS (
-SELECT gid,
-ST_xmin(lod2) AS x1, ST_xmax(lod2) AS x2,
-ST_ymin(lod2) AS y1, ST_ymax(lod2) AS y2,
-ST_zmin(lod2) AS z1, ST_zmax(lod2) AS z2
-FROM roofs
+    SELECT 
+        gid,
+        ST_xmin(lod2) AS x1
+        , ST_xmax(lod2) AS x2
+        , ST_ymin(lod2) AS y1
+        , ST_ymax(lod2) AS y2
+        , ST_zmin(lod2) AS z1
+        , ST_zmax(lod2) AS z2
+    FROM 
+        roofs
 )
-UPDATE roofs SET lod1 = 'SRID=3946;POLYHEDRALSURFACE(
+UPDATE 
+    roofs 
+SET 
+    lod1 = 'SRID=3946;POLYHEDRALSURFACE(
 (('||x1||' '||y1||' '||z1||','
 ||x1||' '||y1||' '||z2||','
 ||x2||' '||y1||' '||z2||','
@@ -62,59 +84,77 @@ UPDATE roofs SET lod1 = 'SRID=3946;POLYHEDRALSURFACE(
 ||x1||' '||y2||' '||z1||','
 ||x1||' '||y1||' '||z1||'))
 )'
-FROM p
-WHERE p.gid = roofs.gid
+FROM 
+    p
+WHERE 
+    p.gid = roofs.gid
 ;
+
 -- LOD 1 Reverse orientation.
-UPDATE roofs SET lod1=st_reverse(lod1);
--- Create spatial indexes
+UPDATE roofs SET lod1 = st_reverse(lod1);
+
+-- Create spatial index
 CREATE INDEX cadbatiment_lod1_idx ON roofs USING GIST(lod1);
 ```
 
 Check the result
 ----------------
 
-Load lod1 geometry with QGIS
-
-Render it both in 2D, and with canvas 3d renderer
+* Load lod1 geometry with QGIS
+* Render it both in 2D, and with canvas 3d renderer
 
 Note that this Virtual Machine is a low performance one
 
-Now add also DEM mnt layer
+* Now add also DEM mnt layer
 
 What do you suggest ?
 
 
-Compute Buldingd elevation from DEM
------------------------------------
+Compute Bulding elevation from DEM
+----------------------------------
 
 ```SQL
+
 -- Compute height for each geometry
 ALTER TABLE roofs ADD COLUMN altitude integer;
-WITH hh
-AS (
-SELECT gid, min(px) AS height
+
+-- 
+WITH hh AS (
+    SELECT gid, min(px) AS height
 FROM (
-SELECT
-gid, st_value(rast,
-st_setsrid( (st_dumppoints(pts)).geom, 3946)
-) as px
-FROM
-(
-select gid, geom as pts
-from roofs
-) as t,
-dem
-WHERE st_intersects(rast, pts)
+    SELECT
+        gid
+        , st_value(rast, st_setsrid( (st_dumppoints(pts)).geom, 3946)) as px
+    FROM (
+        select 
+            gid
+            , geom as pts
+        from 
+            roofs
+    ) as t,
+    dem
+    WHERE 
+        st_intersects(rast, pts)
 ) AS tt
-GROUP BY gid
+GROUP BY 
+    gid
 )
-UPDATE roofs SET altitude=height FROM hh WHERE roofs.gid = hh.gid;
+UPDATE 
+    roofs 
+SET 
+    altitude = height 
+FROM 
+    hh 
+WHERE 
+    roofs.gid = hh.gid;
+
 -- Update roofs Height
-UPDATE roofs
+UPDATE 
+    roofs
 SET
-lod1 = st_translate(lod1, 0, 0, altitude),
-lod2 = st_translate(lod2, 0, 0, altitude);
+    lod1 = st_translate(lod1, 0, 0, altitude),
+    lod2 = st_translate(lod2, 0, 0, altitude);
+
 -- Check altitude generated
 SELECT min(altitude), max(altitude), avg(altitude) FROM roofs;
 ```
@@ -220,7 +260,7 @@ SELECT gid as gid, geom as pos, available_::integer*10 as height, 30 as width fr
 Save your QGIS project
 
 
-Compute average NO2 value per buildind
+Compute average NO2 value per building
 --------------------------------------
 
 
