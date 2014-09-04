@@ -81,6 +81,7 @@ To install horao on Ubuntu Trusty, you have to compile it
   cmake .
   make && sudo make install
   # activate qgis plugins
+  mkdir -p ~/.qgis2/python/plugins
   cd ~/.qgis2/python/plugins/
   ln -s ~/build/horao/qgis_plugin
 ```
