@@ -105,9 +105,10 @@ Import CityGML data into our database
 
 The raw CityGML data still needs a bit of work for Cardano to be able to recognize them.
 
-Cardano is shipped with an SQL script that will do the work. It is located in "docs/texture_load.sql" of the source distribution. It will create a "textured_citygml" table.
+Use the script "texture_load.sql". It will create a "textured_citygml" table.
 
-    psql -h localhost -U pggis -d citygml < ~/data/www/scripts/texture_load.sql
+    wget https://raw.githubusercontent.com/vpicavet/workshop-3d/master/data/texture_load.sql
+    psql -h localhost -U pggis -d citygml < texture_load.sql
 
 We define the type texture in our database:
 
