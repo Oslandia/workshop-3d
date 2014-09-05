@@ -3,9 +3,9 @@ TODO
 
 - [x] Re-run all installation phase from scratch to validate it
 - [x] Add java citygml importer install
-- [ ] Get the dataset ready
-  - [ ] Finish integration steps
-  - [ ] Dump a backup file
+- [x] Get the dataset ready
+  - [x] Finish integration steps
+  - [x] Dump a backup file
   - [x] Get a zip of all source data
   - [x] Get a zip of prepopulated MapCache
 - [x] nice formatting of SQL queries everywhere
