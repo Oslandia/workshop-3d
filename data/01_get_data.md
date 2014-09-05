@@ -11,6 +11,15 @@ In the "oslandia" directory, you will find some additional data, which we can us
 * A fixed and cropped Textured 3D dataset, originally from Grand Lyon. We had to manually correct some features, reduce the texture sizes, and we cropped it to our local zone of interest.
 * A MapCache cache content, which you can download and install in the *~/data/cache* directory, so as not to suffer from the Grand Lyon server lag.
 
+    wget http://91.121.102.10/3ddata/Carte_agglo_Lyon_NO2_2012.zip
+    wget http://91.121.102.10/3ddata/MNT2009_Altitude_10m_CC46.zip
+    wget http://91.121.102.10/3ddata/bati_3D_text_lyon3_citygml.zip
+    wget http://91.121.102.10/3ddata/fpc_fond_plan_communaut.fpctoit.zip
+    wget http://91.121.102.10/3ddata/resultat-adr_voie_lieu.adrarrond.zip
+    wget http://91.121.102.10/3ddata/resultat-jcd_jcdecaux.jcdvelov.zip
+    wget http://91.121.102.10/3ddata/rhone-alpes-latest.shp.zip
+    
+
 From source
 -----------
 
