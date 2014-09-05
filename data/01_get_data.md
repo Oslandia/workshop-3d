@@ -5,7 +5,11 @@ Direct download
 ---------------
 
 You can download archives of all required data here :
-http://www.oslandia.com/3ddata
+http://91.121.102.10/3ddata/
+
+In the "oslandia" directory, you will find some additional data, which we can use later :
+* A fixed and cropped Textured 3D dataset, originally from Grand Lyon. We had to manually correct some features, reduce the texture sizes, and we cropped it to our local zone of interest.
+* A MapCache cache content, which you can download and install in the *~/data/cache* directory, so as not to suffer from the Grand Lyon server lag.
 
 From source
 -----------
@@ -29,7 +33,7 @@ From Lyon Open Data website.
 * [Terrain data](http://smartdata.grandlyon.com/imagerie/modfle-numfrique-de-terrain-du-grand-lyon-pixel-de-10-m/)
 ([zip file](http://smartdata.grandlyon.com/smartdata/wp-content/plugins/wp-smartdata/proxy.php?format=zip&name=MNT2009_Altitude_10m_CC46.zip&commune=undefined&href=https%3A%2F%2Fdownload.data.grandlyon.com%2Ffiles%2Fgrandlyon%2Fimagerie%2Fmnt2009%2FMNT2009_Altitude_10m_CC46.zip))
 
-* [Textured 3D data](http://smartdata.grandlyon.com/localisation/maquette-3d-texturfe-du-3f-arrondissement-de-lyon/) ([Zip file](http://smartdata.grandlyon.com/smartdata/wp-content/plugins/wp-smartdata/proxy.php?format=CityGML&name=LYON3_CityGML&commune=undefined&href=https%3A%2F%2Fdownload.data.grandlyon.com%2Ffiles%2Fgrandlyon%2Flocalisation%2Fbati3d%2FLYON3_CityGML.zip))
+* [Textured 3D data](http://smartdata.grandlyon.com/localisation/maquette-3d-texturfe-du-3f-arrondissement-de-lyon/) ([Zip file - 390bd21e9c0a3adba7677a35aac394e9](http://smartdata.grandlyon.com/smartdata/wp-content/plugins/wp-smartdata/proxy.php?format=CityGML&name=LYON3_CityGML&commune=undefined&href=https%3A%2F%2Fdownload.data.grandlyon.com%2Ffiles%2Fgrandlyon%2Flocalisation%2Fbati3d%2FLYON3_CityGML.zip)) : This is the full original dataset, with high definition textures and some invalid features. We will use our fixed and cropped dataset instead. Feel free to use this anyway if you feel adventurous :-)
 
 From OpenStreetMap (Geofabrik exports)
 
