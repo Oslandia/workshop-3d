@@ -66,7 +66,7 @@ WITH
         lands 
     WHERE 
         type='forest'
-        AND gid = 12
+        AND gid = 35
  )
 SELECT 
     ST_3DIntersection(f1.geom, f2.geom) AS geom, 
