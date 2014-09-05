@@ -97,15 +97,4 @@ Then test the connection with the "Connect" button
 
 Then proceed to the import by moving to the 'Import' tab, selecting the .xml file with the 'Browse' button and pressing 'Import'.
 
-Import into our database
-------------------------
 
-The raw CityGML data still needs a bit of work for Cardano to be able to recognize them.
-
-Cardano is shipped with an SQL script that will do the work. It is located in "docs/texture_load.sql" of the source distribution. It will create a "textured_citygml" table.
-
-    psql -h localhost -U pggis -d citygml < ~/src/cardano/docs/texture_load.sql
-
-Then the table must be copied into the final database :
-
-    pg_dump -U pggis -h localhost citygml -t textured_citygml | psql -h localhost -U pggis lyon
