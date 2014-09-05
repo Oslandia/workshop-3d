@@ -4,11 +4,11 @@ Integrating data
 Cropping and reprojecting
 -------------------------
 
-We are only interested with a small extend of the downloaded data. The zone of interest are in the directory zones.
+We are only interested with a small extent of the downloaded data. The zones of interest are in the directory 'zones'.
 
 Moreover we want to have data in the same coordinate system (namely EPG:3946). We will use the GDAL/OGR command line tools to manipulate our data.
 
-To get the extend we are interested in can be obtained with:
+To get the extent we are interested in can be obtained with:
 
     ogrinfo -al zones | grep Extent
 
@@ -32,7 +32,7 @@ For raster data we use gdalwarp:
 Create and populate the database
 --------------------------------
 
-To facilitate the connexion to the database, we will use a *.pgpass* file, which allow us to store username and password, so as not having to type it each time. The file must be protected.
+To facilitate the connection to the database, we will use a *.pgpass* file, which allows us to store username and password, so as not having to type it each time. The file must be protected.
 
     echo "localhost:5432:*:pggis:pggis" > ~/.pgpass
     chmod 600 ~/.pgpass
@@ -56,5 +56,58 @@ and the cropped raster data:
     raster2pgsql -t 32x32 -I -s 3946 N02.tif no2 | psql -U pggis -h localhost lyon
 
 
+Import of CityGML data
+======================
 
+We will be using 3D textured data in some examples of this workshop. Data are coming from the Grand Lyon open data initiative. These data have been preprocessed for the needs of this workshop (in particular texture resolutions have been decreased).
 
+Once the .zip archive containing CityGML data has been downloaded and decompressed, we will need to download and install a thrid-party Java application that is able to import such data in a PostGIS database.
+
+Import into PostGIS
+------------------------------
+
+First download the setup from
+http://www.3dcitydb.net/3dcitydb/fileadmin/downloaddata/3DCityDB-Importer-Exporter-1.6-postgis-Setup.jar
+Then run it with :
+
+    java -jar 3DCityDB-Importer-Exporter-1.6-postgis-Setup.jar
+
+Follow the instructions of the installer.
+
+We will then need to create a new PostGIS database that will be used specifically for the import.
+
+    createdb -U pggis -h localhost citygml
+    psql -U pggis -h localhost -d citygml -c 'CREATE EXTENSION postgis;'
+    
+After that, the database' schema needs to be initialized. The importer provides a script for that :
+
+    cd ~/3DCityDB-Importer-Exporter/3dcitydb/postgis
+    psql -U pggis -h localhost -d citygml < CREATE_DB.sql
+    
+Now, launch the importer by using the .sh script located in the installation directory, for instance :
+
+    ~/3DCityDB-Importer-Exporter/3DCityDB-Importer-Exporter.sh
+    
+Within the 'Preferences / CityGML import / Apperance' tab, make sure the option "Import appearances, do not import texture files" is checked. Textures will be stored as regular image files on the disk.
+
+Within the 'Database' tab, enter the options needed to connect to the database :
+* server : localhost
+* user : pggis
+* password : you have to enter something (small bug)
+* database : citygml
+Then test the connection with the "Connect" button
+
+Then proceed to the import by moving to the 'Import' tab, selecting the .xml file with the 'Browse' button and pressing 'Import'.
+
+Import into our database
+------------------------
+
+The raw CityGML data still needs a bit of work for Cardano to be able to recognize them.
+
+Cardano is shipped with an SQL script that will do the work. It is located in "docs/texture_load.sql" of the source distribution. It will create a "textured_citygml" table.
+
+    psql -U pggis -h localhost -d citygml < ~/src/cardano/docs/texture_load.sql
+
+Then the table must be copied into the final database :
+
+    pg_dump -U pggis -h localhost citygml -t textured_citygml | psql -U pggis -h localhost lyon
