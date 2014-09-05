@@ -45,3 +45,4 @@ We will need as well to set the URL prefix from where texture files can be downl
 
 **Exercises**:
 * Setup a LOD hierarchy with the textured data close to the ground and the extruded colored data for less detailed views
+* Install ImageMagick and duplicate textures with a smaller size (divide the size by 2). Then setup a LOD hierarchy for these two texture sizes.
