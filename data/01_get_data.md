@@ -29,7 +29,7 @@ From Lyon Open Data website.
 * [Terrain data](http://smartdata.grandlyon.com/imagerie/modfle-numfrique-de-terrain-du-grand-lyon-pixel-de-10-m/)
 ([zip file](http://smartdata.grandlyon.com/smartdata/wp-content/plugins/wp-smartdata/proxy.php?format=zip&name=MNT2009_Altitude_10m_CC46.zip&commune=undefined&href=https%3A%2F%2Fdownload.data.grandlyon.com%2Ffiles%2Fgrandlyon%2Fimagerie%2Fmnt2009%2FMNT2009_Altitude_10m_CC46.zip))
 
-* [Textured 3D data](http://smartdata.grandlyon.com/localisation/maquette-3d-texturfe-du-3f-arrondissement-de-lyon/) ([Zip file](http://smartdata.grandlyon.com/smartdata/wp-content/plugins/wp-smartdata/proxy.php?format=CityGML&name=LYON3_CityGML&commune=undefined&href=https%3A%2F%2Fdownload.data.grandlyon.com%2Ffiles%2Fgrandlyon%2Flocalisation%2Fbati3d%2FLYON3_CityGML.zip)
+* [Textured 3D data](http://smartdata.grandlyon.com/localisation/maquette-3d-texturfe-du-3f-arrondissement-de-lyon/) ([Zip file](http://smartdata.grandlyon.com/smartdata/wp-content/plugins/wp-smartdata/proxy.php?format=CityGML&name=LYON3_CityGML&commune=undefined&href=https%3A%2F%2Fdownload.data.grandlyon.com%2Ffiles%2Fgrandlyon%2Flocalisation%2Fbati3d%2FLYON3_CityGML.zip))
 
 From OpenStreetMap (Geofabrik exports)
 

@@ -2,6 +2,7 @@ TODO
 ====
 
 [x] Re-run all installation phase from scratch to validate it
+[x] Add java citygml importer install
 [] Get the dataset ready
   [] Finish integration steps
   [] Dump a backup file

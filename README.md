@@ -89,6 +89,23 @@ To install horao on Ubuntu Trusty, you have to compile it
   ln -s ~/build/horao/qgis_plugin
 ```
 
+### CityGML loader ###
+
+We use the 3DCityDB CityGML PostGIS importer, which is a java software.
+
+Make sure you have Java installed
+
+    sudo apt-get install default-jre
+
+    wget http://www.3dcitydb.net/3dcitydb/fileadmin/downloaddata/3DCityDB-Importer-Exporter-1.6-postgis-Setup.jar
+    java -jar 3DCityDB-Importer-Exporter-1.6-postgis-Setup.jar
+
+Follow the GUI to install the importer.
+
+Once install, check that the importer can be run :
+
+    ~/3DCityDB-Importer-Exporter/3DCityDB-Importer-Exporter.sh
+
 ### Server-side components ###
 
 To install all server-side components, we use a Docker container, featuring all necessary bits for this workshop.
