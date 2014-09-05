@@ -86,7 +86,7 @@ SELECT
     gid
     , ST_Extrude(
                ST_Buffer(geom, 20),
-               0, 0, nbbornette::integer * 30
+               0, 0, available_::integer * 30
             ) AS geom
 FROM
     velov_stations
