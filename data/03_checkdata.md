@@ -20,23 +20,22 @@ Data validation :
 SELECT 
     gid 
 FROM 
-    cadbatiment 
+    roofs 
 WHERE 
     NOT ST_IsValid(geom);
 
 -- repair geometries
 UPDATE 
-    cadbatiment 
+    roofs 
 SET 
     geom = ST_CollectionExtract(ST_MakeValid(geom),3) 
 WHERE 
     NOT ST_IsValid(geom);
 
 -- delete still invalid geometries
-SELECT 
-    gid 
+DELETE 
 FROM 
-    cadbatiment 
+    roofs 
 WHERE 
     NOT ST_IsValid(geom);
 ```
