@@ -14,26 +14,8 @@ psql -U pggis -h localhost -d lyon
 
 Data validation :
 ```SQL
-/* OGC SFS Validity Check */
-
--- check validity
 SELECT 
     gid 
-FROM 
-    roofs 
-WHERE 
-    NOT ST_IsValid(geom);
-
--- repair geometries
-UPDATE 
-    roofs 
-SET 
-    geom = ST_CollectionExtract(ST_MakeValid(geom),3) 
-WHERE 
-    NOT ST_IsValid(geom);
-
--- delete still invalid geometries
-DELETE 
 FROM 
     roofs 
 WHERE 
