@@ -26,7 +26,7 @@ Visual check
 ------------
 
 * Open QGIS
-* Add DEM raster layer as PostGIS raster layer
+* Add raster layer dem.tif
 * Create a new PostGIS database connection (localhost, user pggis, password pggis, database lyon)
 * Add new PostGIS Layer: arrondissements
 * Add new PostGIS Layer: roofs
