@@ -10,7 +10,7 @@ To add vector data, we must create a vetor tiling object, instance of a class na
 
 ```Javascript
     var baseUrl = "/cgi-bin/tinyows?SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&outputFormat=JSON";
-    var roofsUrl = baseUrl+"&typeName=tows:toitures";
+    var roofsUrl = baseUrl+"&typeName=tows:roofs";
     
     ...
     
