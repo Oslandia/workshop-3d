@@ -1,17 +1,43 @@
-Import CityGML data into our database
--------------------------------------
+Example 5
+=========
 
-The raw CityGML data still needs a bit of work for Cardano to be able to recognize them.
+This example allows to display textured 3D data stored in the database.
 
-Cardano is shipped with an SQL script that will do the work. It is located in "docs/texture_load.sql" of the source distribution. It will create a "textured_citygml" table.
+Texture data
+------------
 
-    psql -h localhost -U pggis -d citygml < ~/data/www/docs/texture_load.sql
+We will first discover how the WFS server returns textured data.
 
-Then the table must be copied into the final database :
+Go to this address in a browser:
 
-    pg_dump -h localhost -U pggis citygml -t textured_citygml | psql -h localhost -U pggis lyon
+http://localhost/cgi-bin/tinyows?SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&outputFormat=JSON&typeName=tows:textured_citygml&featureId=tows:textured_citygml.1
 
-Import textures
----------------
+We are requesting the first object of the textured table.
+Among the loads of data returned, we can notice a field
 
-We have to make sure textures shipped with the CityGML archive are correctly served by Apache. Copy or make a link from the textures directory to ~/data/www/textures
+    "tex": "(appearance/01_BT_1.jpg,\"{{ ..
+
+This is the filename that will be used to access the texture file.
+
+If your environnement has been correctly setup, we should be able to see this particular texture :
+http://localhost/textures/appearance/01_BT_1.jpg
+
+Layer creation
+--------------
+
+This type of textured data will be created by a WfsTinLayer object.
+To create such an object, we will need to set the URL of a the WFS server with the correct layer name.
+We will need as well to set the URL prefix from where texture files can be downloaded.
+
+    var urlTin = baseUrl+"&typeName=tows:textured_citygml";
+    // base url where to find textures
+    var urlImageBase = "/textures/";
+    
+    var tin = new WfsTinLayer(
+        urlTin,
+        urlImageBase,
+        translation,
+        nbDiv,
+        terrain
+    );
+
