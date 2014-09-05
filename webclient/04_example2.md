@@ -87,5 +87,7 @@ Please be aware that an expression-based symbology must be passed as a string. T
     };
 ```
 
-Now try by yourself to change the symbology used by the vector layer: change from 'symbology1' to 'symbology2' and then to 'symbology3'.
-You can also try to change properties of the symbology by yourself.
+**Exercises**:
+* Try to change the symbology used by the vector layer: change from 'symbology1' to 'symbology2' and then to 'symbology3'.
+* Test different values of the properties (color, lineWidth, lineColor, etc.)
+* The roofs layer contains three other fields, named 'no2_red', 'no2_green' and 'no2_blue'. Define a symbology that will use these fields to make a color.
