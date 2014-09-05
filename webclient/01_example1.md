@@ -72,4 +72,10 @@ This object will now be used to define what "layers" will be visible by the fina
 Level of details
 ----------------
 
-TODO
+Cardano builds a 3D scene where objects are stored in a quadtree. For each subdivision of the quadtree, a new tile is requested to each "tiler" defined in the scene file. Each tiler can choose to return a more detailed version of its tile based on the size requested. This is the case for the terrain tiler. The smaller the area requested is, the more detailed will be the returned data.
+
+The 'maxLOD' parameter of the scene file allows to set the maximum level of subdivisions of the quadtree. With maxLOD = 0, no subdivision is involved and only a square tile of fixed size is present.
+
+Try to increase this value to 1 and 2 in the script and test the impacts (by reloading client.html).
+
+We should see more detailed versions of the satellite view when zooming in.
