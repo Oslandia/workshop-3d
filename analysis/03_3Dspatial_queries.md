@@ -90,6 +90,7 @@ SELECT
             ) AS geom
 FROM
     bike
+/**WHERE TILE && geom*/
 ```
 
 Left to the reader :
