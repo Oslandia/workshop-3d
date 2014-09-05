@@ -382,3 +382,13 @@ FROM
 WHERE 
     roofs.gid = colors.gid;
 ```
+
+Check the result
+----------------
+
+In qgis load N02.tif as a raster layer an put it just above the dem layer.
+
+In the LOD2 layer's properties, in the Style tab click on 'Simple Fill' and then on 'Data defined properties...'. Check Color and enter the expression:
+
+    ''||no2_red||','||no2_green||','||no2_blue||',255''
+
