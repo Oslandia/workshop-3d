@@ -117,8 +117,8 @@ Note that this Virtual Machine is a low performance one
 What do you suggest ?
 
 
-Compute Bulding elevation from DEM
-----------------------------------
+Compute Building elevation from DEM
+-----------------------------------
 
 ```SQL
 -- Compute height for each geometry
