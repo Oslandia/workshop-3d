@@ -96,37 +96,3 @@ FROM
 Left to the reader :
 * Use the queries from previous chapter to elevate the graph bars to the right elevation thanks to the DEM.
 
-Another 3D intersection
------------------------
-
-Looking for the areas where the forest species meet some water species...
-
-```SQL
--- 3D Intersects
-
-SET postgis.backend = 'sfcgal';
-
-WITH f AS (
-    SELECT
-        gid
-        , ST_Translate(
-             ST_Extrude(
-                     ST_Buffer(geom, 800)
-                 , 0, 0, 50)
-           , 0, 0, altitude) AS geom
-    FROM 
-        lands 
-    WHERE 
-        type='forest'
-)
-SELECT 
-    l.geom AS geom
-    , l.gid AS gid
-FROM 
-    f, 
-    lands l
-WHERE 
-    f.geom && l.geom
-    AND l.type = 'water'
-    AND ST_3DIntersects(f.geom, ST_Extrude(l.geom, 0, 0, 50))
-```
