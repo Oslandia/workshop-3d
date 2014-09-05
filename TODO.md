@@ -1,5 +1,4 @@
-TODO
-====
+# TODO
 
 [x] Re-run all installation phase from scratch to validate it
 [x] Add java citygml importer install
@@ -21,4 +20,3 @@ TODO
 [] Finish general presentation of Cardano
 [] Add some open questions/exercices to the tutorials
 [] Save a final OVA
-
