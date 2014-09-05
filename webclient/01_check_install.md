@@ -41,7 +41,7 @@ psql -U pggis -h localhost -d pggis -c "SELECT postgis_version();"
 MapCache
 --------
 
-![Mapcache on localhost](http://localhost/mapcache?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&WIDTH=1024&HEIGHT=1024&LAYERS=ortho&STYLES=&FORMAT=image/jpeg&SRS=EPSG:3946&TILED=true&TRANSPARENT=TRUE&BBOX=1838498.1,5169284.2,1849698.1,5180484.2)
+[Test Mapcache on localhost](http://localhost/mapcache?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&WIDTH=1024&HEIGHT=1024&LAYERS=ortho&STYLES=&FORMAT=image/jpeg&SRS=EPSG:3946&TILED=true&TRANSPARENT=TRUE&BBOX=1838498.1,5169284.2,1849698.1,5180484.2)
 
 
 We then check that TinyOWS is running fine in the docker container. We use QGIS for this.
@@ -62,6 +62,8 @@ Note that MapCache cache is saved in the */data* folder of the container, which 
 
 TinyOWS
 -------
+
+[Test TinyOWS on localhost](http://localhost/cgi-bin/tinyows.fcgi?SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&outputFormat=JSON&typeName=tows:arrondissements&BBOX=1838498.1,5169284.2,1849698.1,5180484.2)
 
 We then check that TinyOWS is running fine in the docker container. We also use QGIS for this.
 * Open QGIS
