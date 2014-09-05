@@ -63,7 +63,7 @@ Note that MapCache cache is saved in the */data* folder of the container, which 
 TinyOWS
 -------
 
-[Test TinyOWS on localhost](http://localhost/cgi-bin/tinyows.fcgi?SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&outputFormat=JSON&typeName=tows:arrondissements&BBOX=1838498.1,5169284.2,1849698.1,5180484.2) (you shouls see a list of features in json format)
+[Test TinyOWS on localhost](http://localhost/cgi-bin/tinyows?SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&outputFormat=JSON&typeName=tows:arrondissements&BBOX=1838498.1,5169284.2,1849698.1,5180484.2) (you shouls see a list of features in json format)
 
 We then check that TinyOWS is running fine in the docker container. We also use QGIS for this.
 * Open QGIS
@@ -81,7 +81,7 @@ You should now have a new vector layer loaded in QGIS. Loading can be long if th
 Textures
 --------
 
-[Test textures on localhost](http://localhost/textures/LYON_3_Appearance/07_BT_1.jpg) (you should see an images composed of building potos)
+[Test textures on localhost](http://localhost/w/textures/appearance/07_BT_1.jpg) (you should see an images composed of building potos)
 
 Textures are served from the */data/www/textures* directory.
 You can add required textures there, and check that they are available at the following URL.
