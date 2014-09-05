@@ -82,6 +82,8 @@ After that, the database' schema needs to be initialized. The importer provides 
     cd ~/3DCityDB-Importer-Exporter/3dcitydb/postgis
     psql -h localhost -U pggis -d citygml < CREATE_DB.sql
     
+Enter 3946 when SRID is requested and crs:EPSG::3946 for SRSName.
+    
 Now, launch the importer by using the .sh script located in the installation directory, for instance :
 
     ~/3DCityDB-Importer-Exporter/3DCityDB-Importer-Exporter.sh
@@ -97,4 +99,27 @@ Then test the connection with the "Connect" button
 
 Then proceed to the import by moving to the 'Import' tab, selecting the .xml file with the 'Browse' button and pressing 'Import'.
 
+
+Import CityGML data into our database
+-------------------------------------
+
+The raw CityGML data still needs a bit of work for Cardano to be able to recognize them.
+
+Cardano is shipped with an SQL script that will do the work. It is located in "docs/texture_load.sql" of the source distribution. It will create a "textured_citygml" table.
+
+    psql -h localhost -U pggis -d citygml < ~/data/www/docs/texture_load.sql
+
+We define the type texture in our database:
+
+    psql -h localhost -U pggis -d lyon -c 'CREATE TYPE texture AS (url text,uv float[][]);'
+
+
+Then the table must be copied into the final database :
+
+    pg_dump -h localhost -U pggis citygml -t textured_citygml | psql -h localhost -U pggis lyon
+
+Import textures
+---------------
+
+We have to make sure textures shipped with the CityGML archive are correctly served by Apache. Copy or make a link from the textures directory to ~/data/www/textures
 
