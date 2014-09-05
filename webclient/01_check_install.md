@@ -81,6 +81,8 @@ You should now have a new vector layer loaded in QGIS. Loading can be long if th
 Textures
 --------
 
+[Test textures on localhost](http://localhost/textures/LYON_3_Appearance/07_BT_1.jpg) (you should see an images composed of building potos)
+
 Textures are served from the */data/www/textures* directory.
 You can add required textures there, and check that they are available at the following URL.
 
