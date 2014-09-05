@@ -31,6 +31,7 @@ Some important points :
 * The geometry column must be called geom
 * A non-null unique integer (e.g gid) is mandatory with QGIS in the result
 * When entering queries in the DB manager, you should not write any ";" at the end !
+* For horao, the query needs to contain an tiling WHERE clause as a meta-comment, either ``/**WHERE TILE && ...`` or ``/**AND TILE && ...``
 
 3D Intersection
 ----------------
