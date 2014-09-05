@@ -89,7 +89,7 @@ SELECT
                0, 0, nbbornette::integer * 30
             ) AS geom
 FROM
-    bike
+    velov_stations
 /**WHERE TILE && geom*/
 ```
 
