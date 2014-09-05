@@ -109,6 +109,11 @@ Cardano is shipped with an SQL script that will do the work. It is located in "d
 
     psql -h localhost -U pggis -d citygml < ~/data/www/docs/texture_load.sql
 
+We define the type texture in our database:
+
+    psql -h localhost -U pggis -d lyon -c 'CREATE TYPE texture AS (url text,uv float[][]);'
+
+
 Then the table must be copied into the final database :
 
     pg_dump -h localhost -U pggis citygml -t textured_citygml | psql -h localhost -U pggis lyon
