@@ -22,7 +22,7 @@ SELECT
 FROM
     lands 
 WHERE 
-    type='forest'
+    type='forest' /**TILE && geom*/
 ```
 
 You can now view the generated data with QGIS / Horao.
