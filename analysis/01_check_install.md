@@ -23,4 +23,4 @@ Horao
 
 Check that Horao QGIS plugin is activated in QGIS extensions.
 
-Check that the 3D canvas is enabled.
+Check that the 3D canvas is enabled (you should see a plug icon in the toolbar).
