@@ -1,7 +1,10 @@
 Prepare data
 ============
 
-We will now prepare the data so that we can visualize it with Horao.
+We will now prepare the data so that we can visualize it with Horao. Open a database session:
+
+    psql -U pggis -h localhost -d lyon
+
 
 LOD 2 Building Data Extrusion
 -----------------------------
