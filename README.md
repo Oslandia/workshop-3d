@@ -64,10 +64,13 @@ Once installed, we will need a few packages :
 
 ### QGIS ###
 
-To install QGIS, use Ubuntu packages :
+To install QGIS, use latest stable Ubuntu packages from the QGIS project :
 
+As root (sudo -s) :
 ```
-  sudo apt-get install qgis python-qgis
+  echo "deb http://qgis.org/debian trusty main" > /etc/apt/sources.list.d/qgis.list
+  apt-get update
+  apt-get install qgis python-qgis
 ```
 
 
