@@ -33,4 +33,4 @@ This "extrude" property can be defined by:
 **Exercises**:
 * Modify the symbology to set the height to a constant of 10m.
 * Modify the symbology to set it to 2 times the value of the property "hfacade"
-
+* The symboly.polygon object can contain an 'opacity' parameter between 0.0 and 1.0. Add this property with some values and observe the effects
