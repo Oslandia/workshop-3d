@@ -33,7 +33,7 @@ You can follow the workshop through the various steps of each module :
 * analysis : use the OpenGL viewer, and make some 3D analysis
 * webgl : display 3D in a browser
 
-In each module, steps are marked with a number, allowing you to follow easily the whole training sesion.
+In each module, steps are marked with a number, allowing you to follow easily the whole training session.
 
 Environment
 -----------
@@ -102,9 +102,11 @@ Make sure you have Java installed
 
 Follow the GUI to install the importer.
 
-Once install, check that the importer can be run :
+Once installed, check that the importer can be run :
 
     ~/3DCityDB-Importer-Exporter/3DCityDB-Importer-Exporter.sh
+
+If the jar file seems corrupt, check its md5 sum : 88c44aa25003c21155fb4b05e5e3b4dd
 
 ### Server-side components ###
 
