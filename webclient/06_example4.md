@@ -10,6 +10,7 @@ Let's say we want to display flat polygons most of the time, but extruded polygo
 
 The two LODs will be defined this way :
 
+```Javascript
     var roofs = new WfsLayer(
         roofsUrl,
         ...
@@ -21,6 +22,7 @@ The two LODs will be defined this way :
         ...
         [0,sceneSize/2+1] // <- visibility range
     );
+```
 
 Note here the new last parameter that allows to define the visibility range of a layer.
 

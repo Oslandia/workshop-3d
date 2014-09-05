@@ -8,6 +8,7 @@ With this example, we are going to add some 2D vector data to our previous simpl
 
 To add vector data, we must create a vetor tiling object, instance of a class named "WfsLayer" because date will be requested from a WFS server (TinyOWS here). In the code, the following lines will define this new layer :
 
+```Javascript
     var baseUrl = "/cgi-bin/tinyows?SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&outputFormat=JSON";
     var roofsUrl = baseUrl+"&typeName=tows:toitures";
     
@@ -20,6 +21,7 @@ To add vector data, we must create a vetor tiling object, instance of a class na
         terrain, // <- reference to the terrain layer (for elevation)
         symbology1
     );
+```
 
 The parameters involved are very close to the ones we have been using for the Terrain layer. We are here getting data from a WFS server that is able to serve data formatted in JSON.
 
@@ -32,6 +34,7 @@ Cardano supports a simple symbology defined by means of Javascript objects.
 
 One of the most simple symbology is a simple opaque fill of each polygon feature.
 
+```Javascript
     var symbology1 = {
         zOffsetPercent:2e-3, // Z fighting
         zOffset:0.5,
@@ -40,6 +43,7 @@ One of the most simple symbology is a simple opaque fill of each polygon feature
             color: 0x0000ff // <- blue
         }
     };
+```
 
 zOffset* parameters are specific to the 3D case where different layers of flat polygons could be stacked on the ground. zOffset properties allow to separate each layers by a small artifical elevation in order for them not to mix and give bad visual artefacts.
 
@@ -52,6 +56,7 @@ The function must take one parameter that will represents properties (fields in 
 
 The file contains an example of such an expression-based symbology. The function will return a color, based on the value of the property "hfacade" of the current feature.
 
+```Javascript
     var buildingClass = function (prop) {
         var categories = [{min: 2.0,  max: 2.74, color:0xffffff},
                           {min: 2.74, max: 4.27, color:0xafd1e7},
@@ -65,9 +70,11 @@ The file contains an example of such an expression-based symbology. The function
         }
         return 0x000000;
     }
+```
 
 Please be aware that an expression-based symbology must be passed as a string. This is why we use the method toString() to convert the function into a string.
 
+```Javascript
     var symbology3 = {
         zOffsetPercent:2e-3, // Z fighting
         zOffset:0.5,
@@ -78,6 +85,7 @@ Please be aware that an expression-based symbology must be passed as a string. T
             lineWidth: 3
         }
     };
+```
 
 Now try by yourself to change the symbology used by the vector layer: change from 'symbology1' to 'symbology2' and then to 'symbology3'.
 You can also try to change properties of the symbology by yourself.

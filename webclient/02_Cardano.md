@@ -18,7 +18,7 @@ git clone https://github.com/Oslandia/cardano.git
 ```
 
 Does it work ?
-* Open http://localhost/cardano/client.html
+* Open [http://localhost/w/cardano/client.html](http://localhost/w/cardano/client.html)
 
 client.html
 -----------
@@ -32,7 +32,7 @@ Examples
 
 In the 'examples' directory, we can find some examples of scene files. Scene files are written in Javascript and are mostly descriptive.
 They must be passed as HTTP argument to client.html, without the .js extension
-* Open for instance http://localhost/cardano/client.html?examples/example1
+* Open for instance [http://localhost/w/cardano/client.html?examples/example1](http://localhost/w/cardano/client.html?examples/example1)
 
 We will now study each example to have an overview of the various features already built-in.
 

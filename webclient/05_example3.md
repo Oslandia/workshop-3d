@@ -7,6 +7,7 @@ These buildings are obtained by extruding the base flat polygons, i.e. creating 
 
 When looking at the source code, the only novelty compared to the previous example is the way the symbology of the roof layer is created:
 
+```Javascript
     var symbology = {
         zOffsetPercent:2e-3, // Z fighting
         zOffset:0.5,
@@ -16,6 +17,7 @@ When looking at the source code, the only novelty compared to the previous examp
             color: { expression: buildingClass.toString() }
         }
     };
+```
 
 The color is still given by a Javascript function.
 

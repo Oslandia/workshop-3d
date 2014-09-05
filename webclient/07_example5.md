@@ -29,6 +29,7 @@ This type of textured data will be created by a WfsTinLayer object.
 To create such an object, we will need to set the URL of a the WFS server with the correct layer name.
 We will need as well to set the URL prefix from where texture files can be downloaded.
 
+```Javascript
     var urlTin = baseUrl+"&typeName=tows:textured_citygml";
     // base url where to find textures
     var urlImageBase = "/w/textures/";
@@ -40,4 +41,5 @@ We will need as well to set the URL prefix from where texture files can be downl
         nbDiv,
         terrain
     );
+```
 

@@ -5,7 +5,7 @@ HTML UI
 -------
 
 The result of the first example can be seen by pointing your browser to the following address :
-* http://localhost/cardano/client.html?examples/example1
+* [http://localhost/w/cardano/client.html?examples/example1](http://localhost/w/cardano/client.html?examples/example1)
 
 It consists in a simple scene with a textured terrain on the city of Lyon.
 
