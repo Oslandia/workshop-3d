@@ -126,10 +126,10 @@ Make a shared local folder :
   chmod -R 777 data
 ```
 
-Put the database dump you want to restore in data/restore
+Put the database dump you want to restore in data/restore. See the *data* module to retrieve a database dump.
 
 ```
-  cp lyon.backup data/restore
+  cp lyon.sql data/restore/
 ```
 
 Download and run the container in your Ubuntu OS :
