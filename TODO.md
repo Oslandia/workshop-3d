@@ -6,18 +6,18 @@ TODO
 - [ ] Get the dataset ready
   - [ ] Finish integration steps
   - [ ] Dump a backup file
-  - [ ] Get a zip of all source data
-  - [ ] Get a zip of prepopulated MapCache
-- [ ] nice formatting of SQL queries everywhere
-- [ ] Rename files in analysis
+  - [x] Get a zip of all source data
+  - [x] Get a zip of prepopulated MapCache
+- [x] nice formatting of SQL queries everywhere
+- [x] Rename files in analysis
 - [ ] Fix Cardano installation once it is online
-- [ ] Rename files in webclient
+- [x] Rename files in webclient
 - [ ] Write webclient tutorial for examples
-  - [ ] Example 1
-  - [ ] Example 2
-  - [ ] Example 3
-  - [ ] Example 4
-  - [ ] Example 5
+  - [x] Example 1
+  - [x] Example 2
+  - [x] Example 3
+  - [x] Example 4
+  - [x] Example 5
 - [ ] Finish general presentation of Cardano
 - [ ] Add some open questions/exercices to the tutorials
 - [ ] Save a final OVA
