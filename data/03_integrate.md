@@ -117,7 +117,8 @@ We define the type texture in our database:
 
 Then the table must be copied into the final database :
 
-    pg_dump -h localhost -U pggis citygml -t textured_citygml | psql -h localhost -U pggis lyon
+    psql -h localhost -U pggis -d lyon -c "CREATE TABLE textured_citygml (gid serial primary key, geom geometry('MULTIPOLYGONZ',3946,3), tex texture);"
+    psql -h localhost -U pggis -d citygml -c "COPY textured_citygml TO STDOUT;" | psql -h localhost -U pggis lyon -c "COPY textured_citygml FROM STDIN;"
 
 Import textures
 ---------------
