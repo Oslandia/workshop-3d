@@ -82,6 +82,8 @@ After that, the database' schema needs to be initialized. The importer provides 
     cd ~/3DCityDB-Importer-Exporter/3dcitydb/postgis
     psql -h localhost -U pggis -d citygml < CREATE_DB.sql
     
+Enter 3946 when SRID is requested and crs:EPSG::3946 for SRSName.
+    
 Now, launch the importer by using the .sh script located in the installation directory, for instance :
 
     ~/3DCityDB-Importer-Exporter/3DCityDB-Importer-Exporter.sh
