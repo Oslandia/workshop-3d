@@ -76,6 +76,7 @@ Cardano builds a 3D scene where objects are stored in a quadtree. For each subdi
 
 The 'maxLOD' parameter of the scene file allows to set the maximum level of subdivisions of the quadtree. With maxLOD = 0, no subdivision is involved and only a square tile of fixed size is present.
 
-Try to increase this value to 1 and 2 in the script and test the impacts (by reloading client.html).
+**Exercices**:
+* Move the translation vector a bit
+* Try to increase the maxLOD value to 1 and 2 in the script and test the impacts (by reloading client.html). You should see more detailed versions of the satellite view when zooming in.
 
-We should see more detailed versions of the satellite view when zooming in.
