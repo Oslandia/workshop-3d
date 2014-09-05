@@ -127,9 +127,9 @@ You should now be able to access PostGIS through your localhost Ubuntu (credenti
 
 And you have access to the web server as well :
 
-* http://localhost
-* http://localhost/mapcache
-* http://localhost/cgi-bin/tinyows
+* Apache server on http://localhost ([try it](http://localhost))
+* Mapcache on http://localhost/mapcache ([try it](http://localhost/mapcache))
+* Tinyows on http://localhost/cgi-bin/tinyows ([try it](http://localhost/cgi-bin/tinyows))
 
 You are now ready to follow the workshop.
 
