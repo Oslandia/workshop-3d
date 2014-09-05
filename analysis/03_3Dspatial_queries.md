@@ -79,7 +79,7 @@ FROM
 Bar graphs
 ----------
 
-We can use the extrusion to generate some bar graphs representing the amount of bikes which are available on each public bike station.
+Instead of using the built-in function of horao that allows to draw bar graphs from columns pos, height and width, we can use the extrusion to generate some bar graphs representing the amount of bikes which are available on each public bike station.
 
 ```SQL
 SELECT 
