@@ -35,3 +35,9 @@ They must be passed as HTTP argument to client.html, without the .js extension
 * Open for instance http://localhost/cardano/client.html?examples/example1
 
 We will now study each example to have an overview of the various features already built-in.
+
+Debugging
+---------
+
+We will be manipulating Javascript files and modifications are not error prone. Modern browsers tend to hide Javascript errors from the final user by default.
+We will open the Javascript console (Firefox: F12) during development of our scenes to make sure we know if an error occurs.
