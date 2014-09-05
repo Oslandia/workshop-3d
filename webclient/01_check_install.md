@@ -4,7 +4,7 @@
 Introduction
 ------------
 
-In this part of the workshop, we will learn how to create a Web Client, based on WebGL, Three.js, and XXXX, to display 3D data in a (modern) browser.
+In this part of the workshop, we will learn how to create a Web Client, based on WebGL, Three.js, and Cardano, to display 3D data in a (modern) browser.
 
 The data to display is the data stored in *PostGIS 3D*, which is served by *MapServer TinyOWS*. We also make use of *MapServer MapCache*, to load raster tiles as WMS, caching the data locally for more efficiency and tuning.
 Textures are also served by a simple Apache server.
