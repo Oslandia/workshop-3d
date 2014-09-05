@@ -107,7 +107,7 @@ The raw CityGML data still needs a bit of work for Cardano to be able to recogni
 
 Cardano is shipped with an SQL script that will do the work. It is located in "docs/texture_load.sql" of the source distribution. It will create a "textured_citygml" table.
 
-    psql -h localhost -U pggis -d citygml < ~/data/www/docs/texture_load.sql
+    psql -h localhost -U pggis -d citygml < ~/data/www/scripts/texture_load.sql
 
 We define the type texture in our database:
 
