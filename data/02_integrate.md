@@ -37,23 +37,21 @@ To facilitate the connection to the database, we will use a *.pgpass* file, whic
     echo "localhost:5432:*:pggis:pggis" > ~/.pgpass
     chmod 600 ~/.pgpass
 
-We will need postgis and postgis_sfcgal extensions in a newly created databse.
+We will need postgis and postgis_sfcgal extensions in a newly created databse. We use the pggis database as a template, extensions will be installed.
 
-    psql -U pggis -h localhost -c "CREATE DATABASE lyon WITH OWNER = pggis ENCODING = 'UTF8' TEMPLATE = template0 CONNECTION LIMIT = -1;" postgres
-    psql -U pggis -h localhost -d lyon -c 'CREATE EXTENSION postgis;'
-    psql -U pggis -h localhost -d lyon -c 'CREATE EXTENSION postgis_sfcgal;'
+    psql -h localhost -U pggis -c "CREATE DATABASE lyon WITH OWNER = pggis ENCODING = 'UTF8' TEMPLATE = pggis CONNECTION LIMIT = -1;" postgres
 
 With that we are ready to import the cropped vector data into the database:
 
-    shp2pgsql -W LATIN1 -I -s 3946 roofs.shp roofs | psql -U pggis -h localhost lyon
-    shp2pgsql -W LATIN1 -I -s 3946 arrondissements.shp arrondissements | psql -U pggis -h localhost lyon
-    shp2pgsql -W LATIN1 -I -s 3946 velov_stations.shp velov_stations | psql -U pggis -h localhost lyon
-    shp2pgsql -W LATIN1 -I -s 3946 lands.shp lands | psql -U pggis -h localhost lyon
+    shp2pgsql -W LATIN1 -I -s 3946 roofs.shp roofs | psql -h localhost -U pggis lyon
+    shp2pgsql -W LATIN1 -I -s 3946 arrondissements.shp arrondissements | psql -h localhost -U pggis lyon
+    shp2pgsql -W LATIN1 -I -s 3946 velov_stations.shp velov_stations | psql -h localhost -U pggis lyon
+    shp2pgsql -W LATIN1 -I -s 3946 lands.shp lands | psql -h localhost -U pggis lyon
 
 and the cropped raster data:
 
-    raster2pgsql -t 32x32 -I -s 3946 dem.tif dem | psql -U pggis -h localhost lyon
-    raster2pgsql -t 32x32 -I -s 3946 N02.tif no2 | psql -U pggis -h localhost lyon
+    raster2pgsql -t 32x32 -I -s 3946 dem.tif dem | psql -h localhost -U pggis lyon
+    raster2pgsql -t 32x32 -I -s 3946 N02.tif no2 | psql -h localhost -U pggis lyon
 
 
 Import of CityGML data
@@ -77,12 +75,12 @@ Follow the instructions of the installer.
 We will then need to create a new PostGIS database that will be used specifically for the import.
 
     createdb -U pggis -h localhost citygml
-    psql -U pggis -h localhost -d citygml -c 'CREATE EXTENSION postgis;'
+    psql -h localhost -U pggis -d citygml -c 'CREATE EXTENSION postgis;'
     
 After that, the database' schema needs to be initialized. The importer provides a script for that :
 
     cd ~/3DCityDB-Importer-Exporter/3dcitydb/postgis
-    psql -U pggis -h localhost -d citygml < CREATE_DB.sql
+    psql -h localhost -U pggis -d citygml < CREATE_DB.sql
     
 Now, launch the importer by using the .sh script located in the installation directory, for instance :
 
@@ -106,8 +104,8 @@ The raw CityGML data still needs a bit of work for Cardano to be able to recogni
 
 Cardano is shipped with an SQL script that will do the work. It is located in "docs/texture_load.sql" of the source distribution. It will create a "textured_citygml" table.
 
-    psql -U pggis -h localhost -d citygml < ~/src/cardano/docs/texture_load.sql
+    psql -h localhost -U pggis -d citygml < ~/src/cardano/docs/texture_load.sql
 
 Then the table must be copied into the final database :
 
-    pg_dump -U pggis -h localhost citygml -t textured_citygml | psql -U pggis -h localhost lyon
+    pg_dump -U pggis -h localhost citygml -t textured_citygml | psql -h localhost -U pggis lyon
