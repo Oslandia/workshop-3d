@@ -119,25 +119,31 @@ Compute Bulding elevation from DEM
 ALTER TABLE roofs ADD COLUMN altitude integer;
 
 -- 
-WITH hh AS (
-    SELECT gid, min(px) AS height
-FROM (
-    SELECT
+WITH hh AS 
+(
+    SELECT 
+        gid, 
+        min(px) AS height
+    FROM 
+    (
+        SELECT
+            gid,
+            st_value(rast, st_setsrid( (st_dumppoints(pts)).geom, 3946)) AS px
+        FROM (
+            select 
+                gid,
+                geom AS pts
+            from 
+                roofs
+        ) 
+        AS t,
+        dem
+        WHERE 
+            st_intersects(rast, pts)
+    ) 
+    AS tt
+    GROUP BY 
         gid
-        , st_value(rast, st_setsrid( (st_dumppoints(pts)).geom, 3946)) as px
-    FROM (
-        select 
-            gid
-            , geom as pts
-        from 
-            roofs
-    ) as t,
-    dem
-    WHERE 
-        st_intersects(rast, pts)
-) AS tt
-GROUP BY 
-    gid
 )
 UPDATE 
     roofs 
@@ -179,6 +185,7 @@ ALTER TABLE
     lands 
 ADD COLUMN 
     altitude integer;
+
 
 WITH hh
     AS 
@@ -241,38 +248,70 @@ Compute 3D from DEM on velov_stations
 
 ```SQL
 -- Add a dimension
-ALTER TABLE velov_stations
-ALTER COLUMN geom TYPE Geometry(PointZ, 3946)
-USING st_force3D(geom);
+ALTER TABLE 
+    velov_stations
+ALTER COLUMN 
+    geom 
+TYPE 
+    Geometry(PointZ, 3946)
+USING 
+    st_force3D(geom);
+    
+    
 -- Compute velov_stations planes altitude
 ALTER TABLE velov_stations ADD COLUMN altitude integer;
+
+
 WITH hh
-AS (
-SELECT gid, min(px) as height
-FROM (
-SELECT
-gid, st_value(rast, pts) as px
-FROM
-(
-SELECT gid, geom as pts
-FROM velov_stations
-) as t,
-dem
-WHERE st_intersects(rast, pts)
-) AS tt
-GROUP BY gid
-)
-UPDATE velov_stations
-SET altitude=height
-FROM hh
-WHERE velov_stations.gid = hh.gid;
+AS 
+    (
+        SELECT
+            gid, min(px) as height
+        FROM 
+            (
+                SELECT
+                    gid, st_value(rast, pts) as px
+                FROM
+                    (
+                        SELECT gid, geom as pts
+                        FROM velov_stations
+                    ) 
+                    AS t,
+                    dem
+                WHERE 
+                    st_intersects(rast, pts)
+            ) 
+            AS tt
+        GROUP BY 
+            gid
+    )
+UPDATE 
+    velov_stations
+SET 
+    altitude=height
+FROM 
+    hh
+WHERE 
+    velov_stations.gid = hh.gid;
+
+
 -- Translate
-UPDATE velov_stations SET geom=st_translate(geom,0,0,altitude)
-WHERE altitude IS NOT NULL;
+UPDATE 
+    velov_stations 
+SET 
+    geom=st_translate(geom,0,0,altitude)
+WHERE 
+    altitude IS NOT NULL;
+    
+    
 -- Reverse orientation
 UPDATE velov_stations SET geom=st_reverse(geom);
+
+
 -- Create Spatial Index
 CREATE INDEX bike_gist_idx ON velov_stations USING GIST(geom);
+
+
 -- Check
 SELECT min(altitude), max(altitude), avg(altitude) FROM velov_stations;
 ```
