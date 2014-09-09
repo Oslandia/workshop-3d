@@ -39,6 +39,8 @@ Some important points :
 We compute the 3D intersection of two 3D volumes around forest, which could be interpreted for exemple as the place where some endemic species would be able to meet each other.
 
 ```SQL
+CREATE TABLE forest_intersection AS (
+
 WITH 
  f1 AS (
     SELECT 
@@ -73,7 +75,8 @@ SELECT
     1 AS gid
 FROM 
     f1, f2
-/**WHERE TILE && geom*/
+    
+);
 ```
 
 Bar graphs
