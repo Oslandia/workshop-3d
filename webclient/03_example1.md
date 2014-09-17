@@ -5,7 +5,7 @@ HTML UI
 -------
 
 The result of the first example can be seen by pointing your browser to the following address :
-* [http://localhost/w/cardano/client.html?examples/example1](http://localhost/w/cardano/client.html?examples/example1)
+* [http://localhost/w/cuardo/client.html?examples/example1](http://localhost/w/cuardo/client.html?examples/example1)
 
 It consists in a simple scene with a textured terrain on the city of Lyon.
 
@@ -39,7 +39,7 @@ The first lines of the file allow to define such an extent :
 
 The 'sceneSize' variable will be returned by the function.
 
-Then we need to tell Cardano to build a terrain out of a WMS service.
+Then we need to tell Cuardo to build a terrain out of a WMS service.
 Two services will be requested for that: one WMS service that will return a Digital Elevation Model in order to elevate the terrain model and an optional texture to put on the terrain.
 
 The terrain is created by instanciating a new 'Terrain' object, with the following options :
@@ -72,7 +72,7 @@ This object will now be used to define what "layers" will be visible by the fina
 Level of details
 ----------------
 
-Cardano builds a 3D scene where objects are stored in a quadtree. For each subdivision of the quadtree, a new tile is requested to each "tiler" defined in the scene file. Each tiler can choose to return a more detailed version of its tile based on the size requested. This is the case for the terrain tiler. The smaller the area requested is, the more detailed will be the returned data.
+Cuardo builds a 3D scene where objects are stored in a quadtree. For each subdivision of the quadtree, a new tile is requested to each "tiler" defined in the scene file. Each tiler can choose to return a more detailed version of its tile based on the size requested. This is the case for the terrain tiler. The smaller the area requested is, the more detailed will be the returned data.
 
 The 'maxLOD' parameter of the scene file allows to set the maximum level of subdivisions of the quadtree. With maxLOD = 0, no subdivision is involved and only a square tile of fixed size is present.
 

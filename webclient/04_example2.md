@@ -28,9 +28,9 @@ The parameters involved are very close to the ones we have been using for the Te
 Symbology
 ---------
 
-We now need to tell Cardano how to display vector features. This is what is called symbology in usual GIS applications.
+We now need to tell Cuardo how to display vector features. This is what is called symbology in usual GIS applications.
 
-Cardano supports a simple symbology defined by means of Javascript objects.
+Cuardo supports a simple symbology defined by means of Javascript objects.
 
 One of the most simple symbology is a simple opaque fill of each polygon feature.
 

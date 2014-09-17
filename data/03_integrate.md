@@ -103,7 +103,7 @@ Then proceed to the import by moving to the 'Import' tab, selecting the .xml fil
 Import CityGML data into our database
 -------------------------------------
 
-The raw CityGML data still needs a bit of work for Cardano to be able to recognize them.
+The raw CityGML data still needs a bit of work for Cuardo to be able to recognize them.
 
 Use the script "texture_load.sql". It will create a "textured_citygml" table.
 
