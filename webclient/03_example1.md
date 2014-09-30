@@ -88,6 +88,12 @@ In the same fashion, we had progress bars that will inform the user of the advan
 var progress = new cuardo.ProgressBarControl('progressInfo', notification);
 ```
 
+Finally we lauch the animation loop:
+
+```Javascript
+map.animate();
+```
+
 
 Level of details
 ----------------
