@@ -37,8 +37,6 @@ We will need as well to set the URL prefix from where texture files can be downl
     var tin = new WfsTinLayer(
         urlTin,
         urlImageBase,
-        translation,
-        nbDiv,
         terrain
     );
 ```
