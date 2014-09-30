@@ -26,6 +26,12 @@ The two LODs will be defined this way :
 
 Note here the new last parameter that allows to define the visibility range of a layer.
 
+Those two layers represent the same data, so it seems logical to group them together, e.g. for togling visibility. The class LayerSet allows to do just that:
+
+```Javascript
+var roofs = new cuardo.LayerSet([filled, extruded]);
+```
+
 In order to understand what is expected here, some explanations of how LODs are handled by Cuardo are needed.
 Each level of subdividion will divide one or more tile into four smaller squares.
 The subdivision occurs when the camera is approaching the ground.
