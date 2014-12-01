@@ -16,6 +16,13 @@ We are going to install Cuardo locally and study the examples.
 cd data/www
 git clone https://github.com/Oslandia/cuardo.git
 ```
+After cloning the repository, which only contains sources, the final Javascript library will have to be created.
+Enter the source directory and type `make` for that :
+
+```
+cd cuardo
+make
+```
 
 Does it work ?
 * Open [http://localhost/w/cuardo/client.html](http://localhost/w/cuardo/client.html)
