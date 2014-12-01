@@ -93,7 +93,7 @@ Within the 'Preferences / CityGML import / Apperance' tab, make sure the option 
 Within the 'Database' tab, enter the options needed to connect to the database :
 * server : localhost
 * user : pggis
-* password : you have to enter something (small bug)
+* password : pggis
 * database : citygml
 Then test the connection with the "Connect" button
 
