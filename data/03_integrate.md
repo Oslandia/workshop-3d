@@ -50,8 +50,8 @@ With that we are ready to import the cropped vector data into the database:
 
 and the cropped raster data:
 
-    raster2pgsql -t 32x32 -I -s 3946 dem.tif dem | psql -h localhost -U pggis lyon
-    raster2pgsql -t 32x32 -I -s 3946 N02.tif no2 | psql -h localhost -U pggis lyon
+    raster2pgsql -t 32x32 -I -s 3946 -C dem.tif dem | psql -h localhost -U pggis lyon
+    raster2pgsql -t 32x32 -I -s 3946 -C N02.tif no2 | psql -h localhost -U pggis lyon
 
 
 Import of CityGML data
