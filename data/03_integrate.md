@@ -10,7 +10,7 @@ Moreover we want to have data in the same coordinate system (namely EPG:3946). W
 
 To get the extent we are interested in can be obtained with:
 
-    ogrinfo -al zones | grep Extent
+    ogrinfo -al zones.shp | grep Extent
 
 the result is:
 
