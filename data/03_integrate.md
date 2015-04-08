@@ -123,7 +123,7 @@ Then the table must be copied into the final database:
 If we want to use Cesium Buildings, we have to create a new table where the geometries' coordinates use latitude and longitude:
 
     psql -h localhost -U pggis -d lyon -c "CREATE TABLE textured_citygml_lat_long (gid serial primary key, geom geometry('MULTIPOLYGONZ',4326,3), tex texture);"
-    psql -h localhost -U pggis -d lyon -c "insert into textured_citygml_lat_long select gid, st_transform(geom, 4326), tex from textured_citygml"
+    psql -h localhost -U pggis -d lyon -c "insert into textured_citygml_lat_long select gid, st_transform(geom, 4326), tex from textured_citygml;"
 
 
 Import textures
