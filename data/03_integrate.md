@@ -115,10 +115,16 @@ We define the type texture in our database:
     psql -h localhost -U pggis -d lyon -c 'CREATE TYPE texture AS (url text,uv float[][]);'
 
 
-Then the table must be copied into the final database :
+Then the table must be copied into the final database:
 
     psql -h localhost -U pggis -d lyon -c "CREATE TABLE textured_citygml (gid serial primary key, geom geometry('MULTIPOLYGONZ',3946,3), tex texture);"
     psql -h localhost -U pggis -d citygml -c "COPY textured_citygml TO STDOUT;" | psql -h localhost -U pggis lyon -c "COPY textured_citygml FROM STDIN;"
+    
+If we want to use Cesium Buildings, we have to create a new table where the geometries' coordinates use latitude and longitude:
+
+    psql -h localhost -U pggis -d lyon -c "CREATE TABLE textured_citygml_lat_long (gid serial primary key, geom geometry('MULTIPOLYGONZ',4326,3), tex texture);"
+    psql -h localhost -U pggis -d lyon -c "insert into textured_citygml_lat_long select gid, st_transform(geom, 4326), tex from textured_citygml"
+
 
 Import textures
 ---------------
