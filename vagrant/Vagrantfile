@@ -123,11 +123,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   #   chef.validation_client_name = "ORGNAME-validator"
   scripts = [
+      "docker.sh",
       "packages.sh",
       "qgis.sh",
       "horao.sh",
       "citygml.sh",
-      "dockers.sh",
+      "3dgis.sh",
   ];
   scripts.each { |script| config.vm.provision :shell, :path => script, :privileged => false }
 end
