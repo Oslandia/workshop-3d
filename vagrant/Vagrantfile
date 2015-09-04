@@ -129,6 +129,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       "horao.sh",
       "citygml.sh",
       "3dgis.sh",
+      "workshop.sh"
   ];
   scripts.each { |script| config.vm.provision :shell, :path => script, :privileged => false }
 end
