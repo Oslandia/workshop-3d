@@ -4,28 +4,28 @@ Cuardo
 Introduction
 ------------
 
-Cuardo is the Javascript library and client application that we will use to have a 3D visualization of our data.
-It is based on Three.js and WebGL.
+Cesium Buildings is the Javascript library and client application that we will use to have a 3D visualization of our data.
+It is based on the popular Cesium globe application.
 
-Installing Cuardo 
+Installing Cesium Buildings 
 -----------------
 
-We are going to install Cuardo locally and study the examples.
+We are going to install Cesium Buildings locally and study the examples.
 
 ```bash
 cd data/www
-git clone https://github.com/Oslandia/cuardo.git
-```
-After cloning the repository, which only contains sources, the final Javascript library will have to be created.
-Enter the source directory and type `make` for that :
-
-```
-cd cuardo
-make
+git clone https://github.com/Oslandia/cesium-buildings.git
+cd cesium-buildings
+git fetch origin workshop:workshop
+git checkout workshop
 ```
 
 Does it work ?
-* Open [http://localhost/w/cuardo/client.html](http://localhost/w/cuardo/client.html)
+* Open [http://127.0.0.1/w/cesium-buildings/Example.html](http://127.0.0.1/w/cesium-buildings/Example.html)
+
+
+
+
 
 client.html
 -----------
