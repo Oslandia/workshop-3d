@@ -3,7 +3,7 @@
 
 Now that we have the 3D data in shape and that we have done some visualization, we can also do some 3D analysis inside the database.
 
-We use QGIS BD manager to launch queries and dynamically see the results.
+We use QGIS DB manager to launch queries and dynamically see the results.
 
 3D extrusion
 ------------

@@ -1,7 +1,7 @@
 Check the result
 ----------------
 
-In qgis load N02.tif (located in the "lyon data" folder) as a raster layer an put it just above the dem layer.
+In qgis load N02.tif (located in the "lyon_data" folder) as a raster layer an put it just above the dem layer.
 
 In the 'roofs' layer's properties, in the Style tab click on 'Simple Fill' and then on 'Data defined properties...'. Check Color and enter the expression:
 
