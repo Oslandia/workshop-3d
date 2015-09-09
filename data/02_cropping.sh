@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 
-cd /home/vagrant/lyon\ data
+# Integrating data
+# ================
+
+# All the data used in the workshop is freely available on the Lyon Open Data website (http://data.grandlyon.com).
+# The downloaded data is located in the lyon_data folder. 
+
+# Cropping and reprojecting: we are only interested with a small extent of the raw data.
+
+cd /home/vagrant/lyon_data
 
 # We want to have data in the same coordinate system (namely EPG:3946).
 # We will use the GDAL/OGR command line tools to manipulate our data.

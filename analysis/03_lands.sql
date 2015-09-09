@@ -1,3 +1,11 @@
+-- ----------------------------
+-- Compute 3D from DEM on lands
+-- ----------------------------
+
+-- Execute script:
+-- psql -U pggis -h localhost -d lyon < 03_lands.sql
+
+
 -- Add a dimension
 ALTER TABLE 
     lands

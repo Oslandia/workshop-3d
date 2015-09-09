@@ -1,3 +1,12 @@
+-- -----------------------------------
+-- Compute Building elevation from DEM
+-- -----------------------------------
+
+-- Execute the script:
+-- psql -U pggis -h localhost -d lyon < 02_elevation.sql
+
+
+
 -- Compute height for each geometry
 ALTER TABLE roofs ADD COLUMN altitude integer;
 

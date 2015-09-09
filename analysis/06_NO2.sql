@@ -1,3 +1,10 @@
+-- --------------------------------------
+-- Compute average NO2 value per building
+-- --------------------------------------
+
+-- Execute the script:
+-- psql -U pggis -h localhost -d lyon < 06_NO2.sql
+
 ALTER TABLE roofs ADD COLUMN no2_red float;
 
 

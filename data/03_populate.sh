@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-cd /home/vagrant/lyon\ data
+# Create and populate the database
+# ================================
+
+cd /home/vagrant/lyon_data
 
 # We will need postgis and postgis_sfcgal extensions in a newly created database.
 # We use the pggis database as a template, extensions will be installed.

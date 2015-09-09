@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-cd /home/vagrant/lyon\ data
+# Import of the CityGML data
+# ==========================
+
+cd /home/vagrant/lyon_data
 
 # Prepare the database
 

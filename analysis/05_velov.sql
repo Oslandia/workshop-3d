@@ -1,3 +1,11 @@
+-- -------------------------------------
+-- Compute 3D from DEM on velov_stations
+-- -------------------------------------
+
+-- Execute the script:
+-- psql -U pggis -h localhost -d lyon < 05_velov.sql
+
+
 -- Add a dimension
 ALTER TABLE 
     velov_stations
