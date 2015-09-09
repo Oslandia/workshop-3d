@@ -1,114 +1,23 @@
 Prepare data
 ============
 
-We will now prepare the data so that we can visualize it with Horao. Open a database session:
+We will now prepare the data so that we can visualize it with Horao. 
 
-```
-psql -U pggis -h localhost -d lyon
-```
+Each step has its own sql script file so you don't have to retype the requests. Just execute them using the provided commands.
+
+Please check the scripts for details and additional comments.
 
 LOD 2 Building Data Extrusion
 -----------------------------
 
-```SQL
-ALTER TABLE 
-    roofs
-ADD COLUMN 
-    lod2 geometry('POLYHEDRALSURFACEZ',3946);
-
-
-UPDATE 
-    roofs
-SET 
-    lod2 = ST_GeometryN(ST_Extrude(ST_Force2D(geom), 0, 0, hfacade),1);
-
-
--- Create spatial indexes
-CREATE INDEX roofs_lod2_idx ON roofs USING GIST(lod2);
 ```
-
-LOD 1 Building Data Computation
--------------------------------
-
-```SQL
-ALTER TABLE 
-    roofs 
-ADD COLUMN 
-    lod1 geometry('POLYHEDRALSURFACEZ',3946);
-
-
--- get Polyhedralsurfaces
-WITH p AS (
-    SELECT 
-        gid,
-        ST_xmin(lod2) AS x1
-        , ST_xmax(lod2) AS x2
-        , ST_ymin(lod2) AS y1
-        , ST_ymax(lod2) AS y2
-        , ST_zmin(lod2) AS z1
-        , ST_zmax(lod2) AS z2
-    FROM 
-        roofs
-)
-UPDATE 
-    roofs 
-SET 
-    lod1 = 'SRID=3946;POLYHEDRALSURFACE(
-(('||x1||' '||y1||' '||z1||','
-||x1||' '||y1||' '||z2||','
-||x2||' '||y1||' '||z2||','
-||x2||' '||y1||' '||z1||','
-||x1||' '||y1||' '||z1||'))
-,
-(('||x1||' '||y1||' '||z2||','
-||x1||' '||y2||' '||z2||','
-||x2||' '||y2||' '||z2||','
-||x2||' '||y1||' '||z2||','
-||x1||' '||y1||' '||z2||'))
-,
-(('||x2||' '||y1||' '||z2||','
-||x2||' '||y2||' '||z2||','
-||x2||' '||y2||' '||z1||','
-||x2||' '||y1||' '||z1||','
-||x2||' '||y1||' '||z2||'))
-,
-(('||x1||' '||y1||' '||z1||','
-||x1||' '||y2||' '||z1||','
-||x1||' '||y2||' '||z2||','
-||x1||' '||y1||' '||z2||','
-||x1||' '||y1||' '||z1||'))
-,
-(('||x1||' '||y2||' '||z1||','
-||x2||' '||y2||' '||z1||','
-||x2||' '||y2||' '||z2||','
-||x1||' '||y2||' '||z2||','
-||x1||' '||y2||' '||z1||'))
-,
-(('||x1||' '||y1||' '||z1||','
-||x2||' '||y1||' '||z1||','
-||x2||' '||y2||' '||z1||','
-||x1||' '||y2||' '||z1||','
-||x1||' '||y1||' '||z1||'))
-)'
-FROM 
-    p
-WHERE 
-    p.gid = roofs.gid
-;
-
-
--- LOD 1 Reverse orientation.
-UPDATE roofs SET lod1 = st_reverse(lod1);
-
-
--- Create spatial index
-CREATE INDEX cadbatiment_lod1_idx ON roofs USING GIST(lod1);
+psql -U pggis -h localhost -d lyon < 01_extrusion.sql
 ```
 
 Check the result
 ----------------
 
-* Load lod1 geometry with QGIS
+* Load lod2 geometry with QGIS
 * Render it both in 2D, and with canvas 3d renderer
 
 Note that this Virtual Machine is a low performance one
@@ -121,207 +30,23 @@ What do you suggest ?
 Compute Building elevation from DEM
 -----------------------------------
 
-```SQL
--- Compute height for each geometry
-ALTER TABLE roofs ADD COLUMN altitude integer;
-
-
--- 
-WITH hh AS 
-(
-    SELECT 
-        gid, 
-        min(px) AS height
-    FROM 
-    (
-        SELECT
-            gid,
-            st_value(rast, st_setsrid( (st_dumppoints(pts)).geom, 3946)) AS px
-        FROM (
-            select 
-                gid,
-                geom AS pts
-            from 
-                roofs
-        ) 
-        AS t,
-        dem
-        WHERE 
-            st_intersects(rast, pts)
-    ) 
-    AS tt
-    GROUP BY 
-        gid
-)
-UPDATE 
-    roofs 
-SET 
-    altitude = height 
-FROM 
-    hh 
-WHERE 
-    roofs.gid = hh.gid;
-
--- Update roofs Height
-UPDATE 
-    roofs
-SET
-    lod1 = st_translate(lod1, 0, 0, altitude),
-    lod2 = st_translate(lod2, 0, 0, altitude);
-
--- Check altitude generated
-SELECT min(altitude), max(altitude), avg(altitude) FROM roofs;
+```
+psql -U pggis -h localhost -d lyon < 02_elevation.sql
 ```
 
 Compute 3D from DEM on lands
 ----------------------------
 
-```SQL
--- Add a dimension
-ALTER TABLE 
-    lands
-ALTER COLUMN 
-    geom 
-TYPE
-    Geometry(MultiPolygonZ, 3946)
-USING 
-    st_force3D(geom);
-
-
--- Compute lands planes altitude
-ALTER TABLE 
-    lands 
-ADD COLUMN 
-    altitude integer;
-
-
-WITH hh
-    AS 
-    (
-        SELECT gid, min(px) as height
-        FROM 
-        ( 
-            SELECT
-                gid, st_value(rast, st_pointn(st_exteriorring(st_geometryn(pts,1)),1) ) AS px
-            FROM 
-                (
-                    SELECT gid, geom as pts
-                    FROM lands
-                ) 
-                AS t,
-                dem
-            WHERE 
-                st_intersects(rast, pts)
-        ) 
-        AS tt
-        GROUP BY gid
-    )
-UPDATE 
-    lands
-SET 
-    altitude=height
-FROM 
-    hh
-WHERE 
-    lands.gid = hh.gid;
-    
-    
--- Translate
-UPDATE 
-    lands 
-SET 
-    geom=st_translate(geom,0,0,altitude)
-WHERE 
-    altitude IS NOT NULL;
-    
-    
--- Reverse orientation
-UPDATE 
-    lands 
-SET 
-    geom=st_reverse(geom);
-    
-    
--- Create Spatial Index
-CREATE INDEX lands_gist_idx ON lands USING GIST(geom);
-
-
--- Check
-SELECT min(altitude), max(altitude), avg(altitude) FROM lands;
+```
+psql -U pggis -h localhost -d lyon < 03_lands.sql
 ```
 
 
 Compute 3D from DEM on velov_stations
 -------------------------------------
 
-```SQL
--- Add a dimension
-ALTER TABLE 
-    velov_stations
-ALTER COLUMN 
-    geom 
-TYPE 
-    Geometry(PointZ, 3946)
-USING 
-    st_force3D(geom);
-    
-    
--- Compute velov_stations planes altitude
-ALTER TABLE velov_stations ADD COLUMN altitude integer;
-
-
-WITH hh
-AS 
-    (
-        SELECT
-            gid, min(px) as height
-        FROM 
-            (
-                SELECT
-                    gid, st_value(rast, pts) as px
-                FROM
-                    (
-                        SELECT gid, geom as pts
-                        FROM velov_stations
-                    ) 
-                    AS t,
-                    dem
-                WHERE 
-                    st_intersects(rast, pts)
-            ) 
-            AS tt
-        GROUP BY 
-            gid
-    )
-UPDATE 
-    velov_stations
-SET 
-    altitude=height
-FROM 
-    hh
-WHERE 
-    velov_stations.gid = hh.gid;
-
-
--- Translate
-UPDATE 
-    velov_stations 
-SET 
-    geom=st_translate(geom,0,0,altitude)
-WHERE 
-    altitude IS NOT NULL;
-    
-    
--- Reverse orientation
-UPDATE velov_stations SET geom=st_reverse(geom);
-
-
--- Create Spatial Index
-CREATE INDEX bike_gist_idx ON velov_stations USING GIST(geom);
-
-
--- Check
-SELECT min(altitude), max(altitude), avg(altitude) FROM velov_stations;
+```
+psql -U pggis -h localhost -d lyon < 04_lands.sql
 ```
 
 Check the result
@@ -349,45 +74,14 @@ Save your QGIS project
 Compute average NO2 value per building
 --------------------------------------
 
-
-```SQL
-ALTER TABLE roofs ADD COLUMN no2_red float;
-
-
-ALTER TABLE roofs ADD COLUMN no2_green float; 
-
-
-ALTER TABLE roofs ADD COLUMN no2_blue float;
-
-
-WITH 
-    points AS (SELECT gid, ST_SetSRID(ST_Centroid(geom), 3946) AS geom FROM roofs),
-    colors AS 
-        (
-            SELECT 
-                gid,
-                ST_Value(rast, 1, geom) AS red,  
-                ST_Value(rast, 2, geom) AS green, 
-                ST_Value(rast, 3, geom) AS blue 
-            FROM 
-                points, no2 
-            WHERE 
-                ST_Intersects(geom, rast) 
-        )
-UPDATE 
-    roofs
-SET 
-    (no2_red, no2_green, no2_blue)=(colors.red, colors.green, colors.blue) 
-FROM 
-    colors 
-WHERE 
-    roofs.gid = colors.gid;
+```
+psql -U pggis -h localhost -d lyon < 05_NO2.sql
 ```
 
 Check the result
 ----------------
 
-In qgis load N02.tif as a raster layer an put it just above the dem layer.
+In qgis load N02.tif (located in the "lyon data" folder) as a raster layer an put it just above the dem layer.
 
 In the 'roofs' layer's properties, in the Style tab click on 'Simple Fill' and then on 'Data defined properties...'. Check Color and enter the expression:
 
