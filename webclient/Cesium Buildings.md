@@ -21,3 +21,5 @@ We can also visualize the lod2 data we created from the roof layer:
 * Open http://192.168.56.101/w/cesium-buildings/Example2.html on the host machine.
 
 Clicking the "toggle thematic coloring" button, will color the buildings according to their NO2 value.
+
+Hovering over buildings while "higlight on mouseover" is toggled allows you to inspect the attributes of the buildings.
