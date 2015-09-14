@@ -5,6 +5,7 @@ PostGIS
 -------
 
 The first step is to check that we have a working spatial database with 3D features enabled.
+Open a terminal emulator from the menu and type the following commands.
 
 ```
 psql -h localhost -U pggis -d pggis -c "select postgis_full_version();"
