@@ -57,7 +57,7 @@ The first part of the code defines a function that will build an HTML-formatted 
 
 The second part of the code assigns this description to a Cesium entity. By setting this entity as the viewer's selected entity, Cesium displays a box with the feature's information.
 
-Exercices
+Exercises
 ---------
 * Change the imagery layer.
 * Change the thematic coloring to view in blue the buildings of more than 30 meters and in green the other ones (use the hfacade property).
