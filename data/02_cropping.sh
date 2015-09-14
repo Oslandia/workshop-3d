@@ -10,6 +10,14 @@
 
 cd /home/vagrant/lyon_data
 
+# Clean data
+rm roofs.shp
+rm arrondissements.shp
+rm velov_stations.shp
+rm lands.shp
+rm dem.tif
+rm N02.tif
+
 # We want to have data in the same coordinate system (namely EPG:3946).
 # We will use the GDAL/OGR command line tools to manipulate our data.
 
