@@ -48,6 +48,8 @@ To access the virtual machine from the host machine, we need to configure networ
   * Edit host-only network -> Set IPv4 Address to 192.168.56.1
 * Right-click on the imported virtual machine -> settings -> Network -> Set "Name" field to the previously created host-only network
 
+If you need to quickly load the data into postgis, the script ~/backup_scripts/load_all.sh is available. Otherwise, just follow the instructions in the data and analysis folders.
+
 ## Installing with vagrant
 
 Install vagrant and virtual box:

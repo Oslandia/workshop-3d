@@ -23,3 +23,5 @@ We can also visualize the lod2 data we created from the roof layer:
 Clicking the "toggle thematic coloring" button, will color the buildings according to their NO2 value.
 
 Hovering over buildings while "higlight on mouseover" is toggled allows you to inspect the attributes of the buildings.
+
+You can also change the time of the day by using the Cesium time widget at the bottom of the screen. It will change the shading of the buildings.
