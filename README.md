@@ -38,6 +38,16 @@ To follow this workshop, you will need to have the abovementionned elements inst
 
 You can use a VirtualBox image with all software already installed and setup, or you can choose to install them yourself. See below for installation instructions.
 
+## Configuring the virtual machine
+
+Import the virtual machine in virtual box: File -> Import Appliance
+
+To access the virtual machine from the host machine, we need to configure network options in virtual box:
+* File -> Preferences -> Network -> Host-only Network
+  * Add host-only network (note the name of the created network)
+  * Edit host-only network -> Set IPv4 Address to 192.168.56.1
+* Right-click on the imported virtual machine -> settings -> Network -> Set "Name" field to the previously created host-only network
+
 ## Installing with vagrant
 
 Install vagrant and virtual box:
