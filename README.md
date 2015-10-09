@@ -38,6 +38,8 @@ To follow this workshop, you will need to have the abovementionned elements inst
 
 You can use a VirtualBox image with all software already installed and setup, or you can choose to install them yourself. See below for installation instructions.
 
+The virtual machine can be downloaded at this address: http://37.187.164.233/workshop-3d/Workshop.ova
+
 ## Configuring the virtual machine
 
 Import the virtual machine in virtual box: File -> Import Appliance
